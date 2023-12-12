@@ -1,7 +1,11 @@
 export class AllInteractionModel{
-    branchid : any;
-    branchname: any;
-    branchcode: any;
-    branchcity: any;
-    branchaddress: any;
+    date : any;
+    accountNo: any;
+    empName:  any;
+    followupByWhom: any;
+    followupType: any;
+    custName:  any;
+    nextDate:  any;
+    status: any;
+    desc:  any;
 }

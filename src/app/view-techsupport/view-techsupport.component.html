@@ -42,161 +42,54 @@
                     View Tickets</button>
                 </div>
                 <div class="box">
-                   <div class="row col-lg-11 col-md-12 col-12" id="techSuppInfo">
-                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
-                            <h6>Subject </h6>
-                            <p class="ng-binding">&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quisque
-                                lobortis purus vel sollicitudin malesuada. Fusce ornare, elit vel porta tempus,
-                                arcu lacus sagittis arcu, nec elementum massa arcu a est. Curabitur euismod arcu
-                                id urna convallis, ut tincidunt lectus euismod
+                   <div class="row col-lg-11 col-md-12 col-12"   id="techSuppInfo">
+                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2" >
+                            <h6>Subject : </h6>
+                            <p class="ng-binding" formControlName="subject" >{{data1.subject}}
                             </p>
                     </div>
                   
 
-                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
+                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" formControlName="date" id="techDate">
+                         <p>Date :{{data1.date}} </p>
                     </div>
                 </div>
                 <h4 class="col-md-8 col-sm-8 col-xs-8 mt-3">All Replay's :</h4>
                 <!-- <div id="reply_user" class="col-md-10 col-sm-10 col-xs-10 ng-scope"
                 ng-repeat="rply in techSupportReplayData"> -->
-                <div class="row col-lg-11 col-md-12 col-12" id="reply_user">
+                <div class="row col-lg-11 col-md-12 col-12" id="reply_user"
+                *ngFor="let data of data2">
                     <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
                         <p class="ng-binding">Replay By
-                            &nbsp;&nbsp;:&nbsp;&nbsp;anjuman.mulaniibgfincon.com</p>
+                            &nbsp;&nbsp;:&nbsp;&nbsp;{{data.replyBy}}</p>
               
                     </div>
                   
 
                     <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
+                         <p>Date :&nbsp;&nbsp;{{data.date}} </p>
                     </div>
                     <div id="replay" class="col-md-12 col-sm-12 col-xs-12">
-                        <p class="ng-binding">Mauris malesuada turpis odio. Morbi ac libero sapien. Vivamus
-                            et lobortis libero. Maecenas dictum bibendum nulla a mollis. Vivamus nec elit
-                            finibus mi tristique imperdiet. Suspendisse ligula arcu, congue in posuere nec,
-                            eleifend ac tortor. Vivamus viverra sem vitae nisi fringilla interdum.
-                        </p>
+                        <p class="ng-binding">{{data.reply}} </p>
                     </div>
                 </div>
 
-                <div class="row col-lg-11 col-md-12 col-12" id="reply_user">
-                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
-                        <p class="ng-binding">Replay By
-                            &nbsp;&nbsp;:&nbsp;&nbsp;anjuman.mulaniibgfincon.com</p>
-              
-                    </div>
-                  
-
-                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
-                    </div>
-                    <div id="replay" class="col-md-12 col-sm-12 col-xs-12">
-                        <p class="ng-binding">Mauris malesuada turpis odio. Morbi ac libero sapien. Vivamus
-                            et lobortis libero. Maecenas dictum bibendum nulla a mollis. Vivamus nec elit
-                            finibus mi tristique imperdiet. Suspendisse ligula arcu, congue in posuere nec,
-                            eleifend ac tortor. Vivamus viverra sem vitae nisi fringilla interdum.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="row col-lg-11 col-md-12 col-12" id="reply_user">
-                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
-                        <p class="ng-binding">Replay By
-                            &nbsp;&nbsp;:&nbsp;&nbsp;anjuman.mulaniibgfincon.com</p>
-              
-                    </div>
-                  
-
-                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
-                    </div>
-                    <div id="replay" class="col-md-12 col-sm-12 col-xs-12">
-                        <p class="ng-binding">Mauris malesuada turpis odio. Morbi ac libero sapien. Vivamus
-                            et lobortis libero. Maecenas dictum bibendum nulla a mollis. Vivamus nec elit
-                            finibus mi tristique imperdiet. Suspendisse ligula arcu, congue in posuere nec,
-                            eleifend ac tortor. Vivamus viverra sem vitae nisi fringilla interdum.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="row col-lg-11 col-md-12 col-12" id="reply_user">
-                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
-                        <p class="ng-binding">Replay By
-                            &nbsp;&nbsp;:&nbsp;&nbsp;anjuman.mulaniibgfincon.com</p>
-              
-                    </div>
-                  
-
-                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
-                    </div>
-                    <div id="replay" class="col-md-12 col-sm-12 col-xs-12">
-                        <p class="ng-binding">Mauris malesuada turpis odio. Morbi ac libero sapien. Vivamus
-                            et lobortis libero. Maecenas dictum bibendum nulla a mollis. Vivamus nec elit
-                            finibus mi tristique imperdiet. Suspendisse ligula arcu, congue in posuere nec,
-                            eleifend ac tortor. Vivamus viverra sem vitae nisi fringilla interdum.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="row col-lg-11 col-md-12 col-12" id="reply_user">
-                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
-                        <p class="ng-binding">Replay By
-                            &nbsp;&nbsp;:&nbsp;&nbsp;anjuman.mulaniibgfincon.com</p>
-              
-                    </div>
-                  
-
-                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
-                    </div>
-                    <div id="replay" class="col-md-12 col-sm-12 col-xs-12">
-                        <p class="ng-binding">Mauris malesuada turpis odio. Morbi ac libero sapien. Vivamus
-                            et lobortis libero. Maecenas dictum bibendum nulla a mollis. Vivamus nec elit
-                            finibus mi tristique imperdiet. Suspendisse ligula arcu, congue in posuere nec,
-                            eleifend ac tortor. Vivamus viverra sem vitae nisi fringilla interdum.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="row col-lg-11 col-md-12 col-12" id="reply_user">
-                    <div class="col-lg-10 col-md-12 col-sm-9 col-xs-9 p-2">
-                        <p class="ng-binding">Replay By
-                            &nbsp;&nbsp;:&nbsp;&nbsp;anjuman.mulaniibgfincon.com</p>
-              
-                    </div>
-                  
-
-                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-3" id="techDate">
-                         <p>Date :&nbsp;&nbsp;2017-05-13 </p>
-                    </div>
-                    <div id="replay" class="col-md-12 col-sm-12 col-xs-12">
-                        <p class="ng-binding">Mauris malesuada turpis odio. Morbi ac libero sapien. Vivamus
-                            et lobortis libero. Maecenas dictum bibendum nulla a mollis. Vivamus nec elit
-                            finibus mi tristique imperdiet. Suspendisse ligula arcu, congue in posuere nec,
-                            eleifend ac tortor. Vivamus viverra sem vitae nisi fringilla interdum.
-                        </p>
-                    </div>
-                </div>
-<!-- </div> -->
-
-
-
-<h4 class="col-md-8 col-sm-8 col-xs-8" style="margin-top:40px;">Add Replay :</h4>
+           
+<h4 class="col-md-8 col-sm-8 col-xs-8" style="margin-top:40px;">Add Replay:</h4>
 <div id="add_replay" class="col-lg-11 col-md-12 col-12">
-    <form class="form-horizontal ng-pristine ng-valid" method="post">
+    <form  [formGroup]="techSupport" class="form-horizontal ng-pristine ng-valid" method="post">
+        <!-- <p>ID : {{replay.ticketId}} name : {{replay.reply}}</p> -->
         <input class="form-control ng-pristine ng-untouched ng-valid"
             ng-model="techSupportReplay.ticketId" style="display:none">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
-                <textarea class="form-control ng-pristine ng-untouched ng-valid" path="replay"
-                    ng-model="techSupportReplay.replay" rows="5"></textarea>
+                <textarea class="form-control ng-pristine ng-untouched ng-valid" formControlName="reply" [(ngModel)]="replay.reply" path="reply"
+                     rows="5"></textarea>
             </div>
         </div>
         <div class="mb-5 p-4 " style="float: right;">
             <button type="button"  class="btn btn-info "
-                style="margin-right: 10px;">Submit</button>
+                style="margin-right: 10px;" (click)="onSubmit()">Submit</button>
             <button type="button" class="btn bg-navy canc">Cancel</button>
         </div>
 

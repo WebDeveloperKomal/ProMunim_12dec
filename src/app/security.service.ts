@@ -12,7 +12,7 @@ export class SecurityService {
 
   constructor(private http : HttpClient) { }
 
-  baseUrl="http://localhost:8181";
+  baseUrl="http://localhost:8181/user";
 
   Login(credentials:{email:string,password:string})
   {

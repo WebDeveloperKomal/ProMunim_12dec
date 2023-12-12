@@ -9,69 +9,64 @@ import { ApiService } from '../api.service';
 })
 export class AllComplaintsMainComponent {
   SearchText : any ;
-  branchid : number | undefined;
-  branchname : any;
-  branchcode: any;
-  branchcity: any;
-  branchaddress : any;
+ 
   page = 1;
   pageSize = 10 ;
   dataarray: AllCOmplaintsMainModel[] = [];
   currentPage: number = 1;
   countries: AllCOmplaintsMainModel[] | undefined;
   collectionSize =100;
-  employeeForm !: FormGroup;
+
+  complaintList:AllCOmplaintsMainModel[] = [];
+
+
   users : any;
+
+  // : AllCOmplaintsMainModel = new AllCOmplaintsMainModel();
+
   constructor(private formBuilder: FormBuilder , private api : ApiService) {
-
-
-
-
-    {
-      this.api.users().subscribe((data)=> {
-        console.log('data', data);
-        this.users = data
-      })
-    }
-
-    this.employeeForm = this.formBuilder.group({
-      location: ['', Validators.required], // Add validation if needed
-      maindepartment: ['', Validators.required], // Add validation if needed
-      department: ['', Validators.required] // Add validation if needed
+    // this.employeeForm = this.formBuilder.group({
+    //   location: ['', Validators.required], // Add validation if needed
+    //   maindepartment: ['', Validators.required], // Add validation if needed
+    //   department: ['', Validators.required] // Add validation if needed
      
-    });
-  this.dataarray = [
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION	' , branchaddress:'Tentative statement delayed',emiid : 'A1000' , branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Daund',emiid : 'A1000' , branchname: 'Hadapsar'  },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Tentative statement delayed',emiid : 'A1000' , branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Daund',emiid : 'A1000' , branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Daund' ,emiid : 'A1000', branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Tentative statement delayed' ,emiid : 'A1000' , branchname: 'Hadapsar'},
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Daund',emiid : 'A1000' , branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Tentative statement delayed',emiid : 'A1000' , branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Tentative statement delayed',emiid : 'A1000' , branchname: 'Hadapsar' },
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Daund' ,emiid : 'A1000' , branchname: 'Hadapsar'},
-    {branchid : 10601400000001, branchcustname :'#CDE-699-63750' ,branchcode :'18-Sep-2023' , branchcity :'OM SAINATH CONSTRUCTION' , branchaddress:'Tentative statement delayed',emiid : 'A1000' , branchname: 'Hadapsar' },
-    // {branchid : 12, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'18-Sep-2023' , branchaddress:'Daund',emiid : 'A1000'  },
-    // {branchid : 13, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028',emiid : 'A1000' , branchname: 'Hadapsar' },
-    // {branchid : 14, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028' ,emiid : 'A1000' , branchname: 'Hadapsar'},
-   ]
+    // });
+
 }
 
+ngOnInit(){
+  this.api.allCustomerComplaint().subscribe(
+    ( data: any) => {
+
+      this.complaintList=data.data;
+      console.log('Response successful!', data.data);
+      this.collectionSize = data.data.length;
+    },
+    (error:any) => {
+      console.error('API Error:', error);
+    }
+  );
+}
 applyFilter(): void {
   const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  this.dataarray = filteredData.filter((data) =>
-    data.branchname.toLowerCase().includes(searchString) ||
-    data.branchcode.toLowerCase().includes(searchString) ||
-    data.branchcity.toLowerCase().includes(searchString) ||
-    data.branchaddress.toLowerCase().includes(searchString)
+  const filteredData = [...this.complaintList];
+  this.complaintList = filteredData.filter((data) =>
+
+  (data.complaintId !== null && !isNaN(data.complaintId) && data.complaintId.toString().includes(searchString)) ||
+  (data.ticketId !== null && !isNaN(data.ticketId) && data.ticketId.toString().includes(searchString)) ||
+  (data.accountNo !== null && !isNaN(data.accountNo) && data.accountNo.toString().includes(searchString)) ||
+    data.subject.toLowerCase().includes(searchString) ||
+    (data.date !== null && !isNaN(data.date) && data.date.toString().includes(searchString)) ||
+    data.status.toLowerCase().includes(searchString) ||
+    // data.insertByUser.toLowerCase().includes(searchString) ||
+    data.companyName.toLowerCase().includes(searchString) ||
+    data.branch.toLowerCase().includes(searchString)
   );
 }
 refreshCountries() {
-  this.countries = this.dataarray
-    .map((country, i) => ({id: i + 1, ...country}))
-    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  // this.countries = this.dataarray
+  //   .map((country, i) => ({id: i + 1, ...country}))
+  //   .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
 }
 
 }

@@ -27,6 +27,9 @@ export class ProductsComponent {
     this.apiservice.allProducts().subscribe(
       (response:any)=>{
         this.productList = response.data;
+        console.log('val',response.data );
+        
+        this.collectionSize = response.data.length;
       },
       (error:any)=>{
         console.error(error);
@@ -73,16 +76,36 @@ export class ProductsComponent {
     });
   }
 
+  
+
 applyFilter(): void {
-  // const searchString = this.SearchText.toLowerCase();
-  // const filteredData = [...this.dataarray];
-  // this.dataarray = filteredData.filter((data) =>
-  //   data.branchname.toLowerCase().includes(searchString) ||
-  //   data.branchcode.toLowerCase().includes(searchString) ||
-  //   data.branchcity.toLowerCase().includes(searchString) ||
-  //   data.branchaddress.toLowerCase().includes(searchString)
-  // );
+  if (!this.SearchText) {
+    
+    this.productList = [...this.productList];
+    return;
+  }
+  const searchString = this.SearchText.toLowerCase();
+  this.productList = this.productList.filter((data) =>
+    data.productName.toLowerCase().includes(searchString) ||
+    (data.productId !== null && !isNaN(data.productId) && data.productId.toString().includes(searchString)) ||
+    (data.minValue !== null && !isNaN(data.minValue) && data.minValue.toString().includes(searchString)) ||
+    (data.maxValue !== null && !isNaN(data.maxValue) && data.maxValue.toString().includes(searchString))
+ 
+  );
 }
+
+// applyFilter(): void {
+//   const searchString = this.SearchText.toLowerCase();
+//   const filteredData = [...this.productList];
+//   this.productList = filteredData.filter((data) =>
+//     data.productId.toLowerCase().includes(searchString) ||
+//     data.productName.toLowerCase().includes(searchString) ||
+//     data.minValue.toLowerCase().includes(searchString) ||
+//     data.maxValue.toLowerCase().includes(searchString)
+
+
+//   );
+// }
 refreshCountries() {
   this.countries = this.dataarray
     .map((country, i) => ({id: i + 1, ...country}))

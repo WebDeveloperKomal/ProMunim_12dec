@@ -25,7 +25,9 @@ export class ViewProductFeesComponent {
   ngOnInit(){
     this.id = this.route.snapshot.params['id'];
     this.apiService.ProductfeesById(this.id).subscribe(
-      (res:any)=>{console.log(res.data)},
+      (res:any)=>{console.log(res.data)
+        
+      },
       (err:any)=>{console.error(err);}
     )
   }

@@ -1,7 +1,6 @@
 export class AddTIDModel {
-    branchid : any;
-    branchname: any;
-    branchcode: any;
-    branchcity: any;
-    branchaddress: any;
+    customerId!:number;
+    aofNo !:number;
+    status!:string;
+    courierId!:number;
 }

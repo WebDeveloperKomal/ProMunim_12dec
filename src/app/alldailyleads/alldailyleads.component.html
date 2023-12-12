@@ -1,28 +1,4 @@
-<!-- <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
-            </li>
-           
-            <li class="breadcrumb-item active" aria-current="page">New Customer</li>
-          </ol>
-        </nav>
-        
-       
-              <div class="page-header">
-                <h1>
-                    New Customer
-                </h1>
-            </div>
-                <div>
-              <button type="button" routerLink="/add-new-customer" class="btn btn-info p-3" style="float: right;">
-                Add New Customer</button>
-              </div>
-               -->
-
+<!-- 
                <div class="container-fluid">
                 <div class="row">
                   <div class="col">
@@ -191,7 +167,7 @@
           <p>Show
             <select name="branch_datatable_length" (ngModelChange)="refreshCountries()" [(ngModel)]="pageSize"
               aria-controls="branch_datatable">
-              <!-- [(ngModel)]="resultsPerPage" -->
+             
               <option [ngValue]="10">10</option>
               <option [ngValue]="25">25</option>
               <option [ngValue]="50">50</option>
@@ -258,16 +234,13 @@
                     
                     <td>{{data.branchname}}</td>
                     <td>{{data.branchcity}}</td>
-                    <!-- <td>{{data.branchcity}}</td> -->
+                    
                     <td>
                         <button class="btn" style="background-color:#003974!important; color: white;" routerLink="/set/view-add-dailyLeads" >
                             View/Add Visit
-                            <!-- <i class="ace-icon fa fa-info bigger-120"></i> -->
+                          
                         </button>&nbsp;&nbsp;
-                        <!-- <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/" >
-                            <i class="ace-icon fa fa-pencil bigger-120"></i>
-                        </button> -->
-                        
+                       
                     </td>
                   </tr>
                 </tbody>
@@ -281,10 +254,177 @@
                       aria-label="Default pagination"></ngb-pagination>
   
                 </div>
-              <!-- </div> -->
-
-            <!-- </div> -->
-          <!-- </div> -->
+          
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
+            </li>
+           
+            <li class="breadcrumb-item active" aria-current="page">New Customer</li>
+          </ol>
+        </nav>
+        
+       
+              <div class="page-header">
+                <h1>
+                    New Customer
+                </h1>
+            </div>
+                <div>
+              <button type="button" routerLink="/add-new-customer" class="btn btn-info p-3" style="float: right;">
+                Add New Customer</button>
+              </div>
+               -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
+          </li>
+
+          <li class="breadcrumb-item active" aria-current="page">Daily Leads</li>
+        </ol>
+      </nav>
+      <div class="container ">
+        <div class="row">
+          <div class="col">
+            <div class="page-header">
+              <h1>
+                Daily Leads
+              </h1>
+            </div>
+            <div class="container" style="border: 1px solid #8b98a1;">
+              <div class="row">
+
+                <form [formGroup]="dailyleadform" class="form-inline  col-md-12 col-sm-12 col-xs-12 mt-5">
+                  <div class="col-12">
+                    <div class="col-lg-2 col-md-10 col-11 m-3 m-lg-0">
+                      <label for="location">Select Branch :</label>
+                      <select formControlName="branch" class="form-select " >
+  
+                        <option value="">---Select Branch---</option>
+                        <option *ngFor="let branch of branches" value={{branch.branchName}}>{{branch.branchName}}</option>
+  
+                        
+                      </select>
+                    </div>
+
+
+
+                    <div style="float: right;">
+                      <button type="button" class="btn btn-info m-lg-4 m-4" (click)="onSubmit()"><i
+                          class="ace-icon fa fa-check bigger-110"></i>
+                        Submit</button>
+
+                      <button type="button" class="btn canc m-lg-4 m-4">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div id="branch_datatable_wrapper" class="dataTables_wrapper no-footer mt-5">
+              <div class="row">
+                <div class="col-lg-9 col-md-8">
+                  <div class="dataTables_length" id="branch_datatable_length">
+                    <p>Show
+                      <select name="branch_datatable_length" (ngModelChange)="refreshCountries()" [(ngModel)]="pageSize"
+                        aria-controls="branch_datatable">
+                        <!-- [(ngModel)]="resultsPerPage" -->
+                        <option [ngValue]="10">10</option>
+                        <option [ngValue]="25">25</option>
+                        <option [ngValue]="50">50</option>
+                        <option [ngValue]="100">100</option>
+                      </select> entries
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="dataTables_filter" id="branch_datatable_filter">
+                    <p>Search:
+                      <input type="text" [(ngModel)]="SearchText" (input)="applyFilter()" placeholder=""
+                        aria-controls="branch_datatable">
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr role="row">
+                  <th class="sorting_asc" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="S.N.: activate to sort column descending" style="width: 67px;" aria-sort="ascending">
+                    S.N.</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="S.N.: activate to sort column descending" style="width: 67px;" aria-sort="ascending">
+                    CustId</th>
+                  <th class="sorting" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="Company Name: activate to sort column ascending" style="width: 185px;">Company Name</th>
+                  <th class="sorting" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="Customer Name: activate to sort column ascending" style="width: 192px;">Customer Name
+                  </th>
+                  <th class="sorting" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="Contact No.: activate to sort column ascending" style="width: 153px;">Contact No.</th>
+                  <th class="sorting" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="Branch: activate to sort column ascending" style="width: 101px;">Branch</th>
+                  <th class="sorting" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="Attended By: activate to sort column ascending" style="width: 147px;">Attended By</th>
+                  <th class="sorting" tabindex="0" aria-controls="dailyVisit_datatable" rowspan="1" colspan="1"
+                    aria-label="Action: activate to sort column ascending" style="width: 126px;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let data of leadsList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
+                  <td>{{index+1}}</td>
+                  <td>{{data.customer_id}}</td>
+                  <td>{{data.company_name}}</td>
+                  <td>{{data.cust_name}}</td>
+                  <td>{{data.contact_no}}</td>
+                  <td>{{data.branch}}</td>
+                  <td>{{data.attendedByFN + data.attendedByLN}}</td>
+                  <td>
+                    <button class="btn" style="background-color:#003974!important; color: white;" (click)="edit(data.customer_id)"
+                      routerLink="/set/view-add-dailyLeads">
+                      View/Add Visit
+                      <!-- <i class="ace-icon fa fa-info bigger-120"></i> -->
+                    </button>&nbsp;&nbsp;
+                    <!-- <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/" >
+                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                        </button> -->
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2">
+              <div class="dataTables_info mt-3" style="font-size: 14px;" id="branch_datatable_info" role="status"
+                aria-live="polite">
+                Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
+                  pageSize}} of {{leadsList.length}} entries </div>
+                  <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
+                    aria-label="Default pagination"></ngb-pagination>
+
+              </div>
+              <!-- </div> -->
+
+              <!-- </div> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>

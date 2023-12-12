@@ -572,29 +572,29 @@
                                             <div class="col-md-4 col-sm-4 col-xs-12 ">
                                                 <label>
                                                     <input type="radio" name="type" id="type" value="INDIVIDUAL"
-                                                        ng-model="occupIncome.type" ng-click="showIndName()"
-                                                        checked="checked" class="ng-pristine ng-untouched ng-valid">
+                                                        ng-model="occupIncome.type" 
+                                                        checked="checked" class="ng-pristine ng-untouched ng-valid" (click)="show1()">
                                                     If A Individual, you work for </label>
                                             </div>
                                             <div class="col-md-4 col-sm-4 col-xs-12">
                                                 <label>
                                                     <input type="radio" name="type" id="type" value="NON INDIVIDUAL"
-                                                        ng-model="occupIncome.type" ng-click="showNoIndName()"
-                                                        class="ng-pristine ng-untouched ng-valid">
+                                                        ng-model="occupIncome.type"
+                                                        class="ng-pristine ng-untouched ng-valid" (click)="show2()">
                                                     If Non Individual, you are </label>
                                             </div>
                                             <div class="col-md-4 col-sm-4 col-xs-12">
                                                 <label>
                                                     <input type="radio" name="type" id="type" value="SELF EMPLOYEED"
-                                                        ng-model="occupIncome.type" ng-click="showSelfBussName()"
-                                                        class="ng-pristine ng-untouched ng-valid">
+                                                        ng-model="occupIncome.type" 
+                                                        class="ng-pristine ng-untouched ng-valid" (click)="show3()">
                                                     If Self Employed, your nature of </label>
                                             </div>
                                         </form>
                                     </div>
                                     <hr>
 
-                                    <div id="individual">
+                                    <div id="individual" *ngIf="individual">
                                         <form class="form-horizontal form-label-left ng-pristine ng-valid ">
                                             <div class="form-group row m-2">
                                                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -651,7 +651,9 @@
                                         </form>
                                     </div>
 
-                                    <div id="non_individual" style="display:none;">
+
+
+                                    <div id="non_individual" *ngIf="nonindividual" >
                                         <form class="form-horizontal form-label-left ng-pristine ng-valid">
                                             <div class="form-group row">
                                                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -713,7 +715,7 @@
                                         </form>
                                     </div>
 
-                                    <div id="self_emp" style="display:none;">
+                                    <div id="self_emp" *ngIf="selfemployee">
                                         <form
                                             class="form-horizontal form-label-left ng-pristine ng-invalid ng-invalid-required">
                                             <div class="form-group row">

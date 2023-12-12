@@ -45,6 +45,17 @@ export class ViewBranchComponent {
     this.apiService.BranchById(this.id).subscribe(
       (response:any)=>{
         this.branch=response.data;
+          
+        this.viewbranchForm.patchValue({
+          branchName:  response.data[0].branchName,
+          branchClassification: response.data[0].branchClassification,
+          branchCode: response.data[0].branchCode,
+          branchCity: response.data[0].branchCity,
+          branchArea: response.data[0].branchArea,
+          branchAddress: response.data[0].branchAddress,
+          latitude: response.data[0].latitude,
+          longitude: response.data[0].longitude,
+         })
       },
       (error:any)=>{console.error(error);}
     )

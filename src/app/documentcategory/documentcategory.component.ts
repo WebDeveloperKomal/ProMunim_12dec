@@ -26,6 +26,7 @@ export class DocumentcategoryComponent {
     this.apiService.allDocumentCategories().subscribe(
       (response:any)=>{
         this.DocumentCategoriesList=response.docCategory;
+        this.collectionSize =response.docCategory.length;
       },
       (error:any)=>{
         console.error(error);        
@@ -41,13 +42,14 @@ export class DocumentcategoryComponent {
 
 applyFilter(): void {
   const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  // this.dataarray = filteredData.filter((data) =>
-  //   data.branchname.toLowerCase().includes(searchString) ||
-  //   data.branchcode.toLowerCase().includes(searchString) ||
-  //   data.branchcity.toLowerCase().includes(searchString) ||
-  //   data.branchaddress.toLowerCase().includes(searchString)
-  // );
+  const filteredData = [...this.DocumentCategoriesList];
+  this.DocumentCategoriesList = filteredData.filter((data) =>
+    // data.cid.toLowerCase().includes(searchString) ||
+    data.name.toLowerCase().includes(searchString) ||
+    (data.cid !== null && !isNaN(data.cid) && data.cid.toString().includes(searchString)) 
+    // data.typeId.toLowerCase().includes(searchString) 
+    
+  );
 }
 refreshCountries() {
   this.countries = this.dataarray

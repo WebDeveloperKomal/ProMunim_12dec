@@ -1,7 +1,6 @@
 export class ViewAddDailyLeadsModel {
-    branchid : any;
-    branchname: any;
-    branchcode: any;
-    branchcity: any;
-    branchaddress: any;
+    next_visit_date:any;
+    description:any;
+    lead_id:any;
+    visit_date:any;
 }

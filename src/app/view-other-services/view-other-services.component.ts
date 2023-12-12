@@ -16,7 +16,7 @@ export class ViewOtherServicesComponent {
   data:any;
   service:OtherServiceModel = new OtherServiceModel();
   id!:number;
-
+// otherservicesList = 
   
   constructor(private formBuilder: FormBuilder, private apiService:ApiService, private route:ActivatedRoute) {
     this.complianceForm = this.formBuilder.group({
@@ -31,7 +31,18 @@ export class ViewOtherServicesComponent {
     this.apiService.OtherServiceById(this.id).subscribe(
       (response:any)=>{
         console.log(response.data);        
-        this.data=response.data;},
+        this.service=response.data;
+        this.complianceForm.patchValue({
+          serviceName : response.data[0].serviceName,
+          description: response.data[0].description,
+          fees : response.data[0].fees
+
+         
+
+        })
+      
+      },
+
       (error:any)=>{console.error(error);}
     )
   }

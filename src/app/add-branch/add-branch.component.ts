@@ -28,6 +28,8 @@ export class AddBranchComponent {
   }
 
   onSubmit(){
+    console.log(this.branch);
+
     this.apiService.addBranch(this.branch).subscribe(
       (response:any)=>{
         console.log(response.data);
@@ -44,7 +46,7 @@ export class AddBranchComponent {
         });
       }
     );
-    setInterval(()=>{window.location.reload()},1000);
+    // setInterval(()=>{window.location.reload()},1000);
   }
 
 }

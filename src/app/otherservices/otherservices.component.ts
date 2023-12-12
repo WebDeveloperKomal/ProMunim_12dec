@@ -17,7 +17,8 @@ export class OtherservicesComponent {
   dataarray: OtherServicesModel[] = [];
   currentPage: number = 1;
   countries: OtherServicesModel [] | undefined;
-  collectionSize =100;
+  collectionSize : any;
+  collectionSize1 = 100;
 
   servicesList:OtherServicesModel[]=[];
 
@@ -27,6 +28,7 @@ export class OtherservicesComponent {
     this.apiService.allOtherServices().subscribe(
       (response:any)=>{
         this.servicesList = response.data;
+        this.collectionSize = response.data.length ;
       },
       (error:any)=>{
         console.error(error);
@@ -77,13 +79,18 @@ export class OtherservicesComponent {
 
 applyFilter(): void {
   const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  // this.dataarray = filteredData.filter((data) =>
-  //   data.branchname.toLowerCase().includes(searchString) ||
-  //   data.branchcode.toLowerCase().includes(searchString) ||
-  //   data.branchcity.toLowerCase().includes(searchString) ||
-  //   data.branchaddress.toLowerCase().includes(searchString)
-  // );
+  const filteredData = [...this.servicesList];
+  this.servicesList = filteredData.filter((data) =>
+    data.serviceName.toLowerCase().includes(searchString) ||
+    data.description.toLowerCase().includes(searchString) ||
+    (data.fees !== null && !isNaN(data.fees) && data.fees.toString().includes(searchString)) ||
+    (data.serviceId !== null && !isNaN(data.serviceId) && data.serviceId.toString().includes(searchString)) 
+    // data.fees.toLowerCase().includes(searchString) ||
+    // data.serviceId.toLowerCase().includes(searchString)
+
+
+    
+  );
 }
 refreshCountries() {
   this.countries = this.dataarray

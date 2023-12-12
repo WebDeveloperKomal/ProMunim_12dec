@@ -1,175 +1,175 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
-            </li>
-            <!-- <li class="breadcrumb-item"><a href="#">Settings</a></li> -->
-            <li class="breadcrumb-item active" aria-current="page">TID Generation</li>
-          </ol>
-        </nav>
-        <div class="container ">
-          <div class="row">
-            <div class="col">
-              <div class="page-header">
-                <h1>
-                    TID Generation
-                </h1>
-              </div>
-              <div>
-              <button type="button" routerLink="/set/alltid" class="btn btn-info" style="float: right;">
-                View All TID's</button>
-              </div>
-
-
-              <div class="col-md-12 col-sm-12 col-xs-12 box">
-                <div class="nav-tabs-custom" >
-                    <ul class="nav nav-tabs " >
-                        <!-- <li class="active"><a aria-expanded="true" href="#tab1" data-toggle="tab"
-                               >All Visits</a></li>
-                        <li class="" ><a aria-expanded="false" href="#tab2"
-                                data-toggle="tab">Add Visit Details</a></li> -->
-
-                                <li [class.active]="activeTab === 'tab1'"><a (click)="changeTab('tab1')" > 
-                                    Update Status</a></li>
-                                <li [class.active]="activeTab === 'tab2'" ><a (click)="changeTab('tab2')">Update Courier Details</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active mt-5" [class.active]="activeTab === 'tab1'" id="tab1">
-                            <form class="form-horizontal"[formGroup]="complianceForm">
-                                <div class="col-lg-offset-1">
-
-                                <div class="form-group row">
-                                    <label for="taxLink" class="col-lg-1 col-4 col-form-label ml-2" >Status :</label>
-                                    <div class="col-lg-4 col-8">
-                                        <select formControlName="product" class="form-select">
-                                            <option value="" selected>----------- Select----------</option>
-                                            <option value="INTERESTED">Pending </option>
-                                            <option value="NOT INTERESTED">Complete</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                              
-
-                                <div class="form-group">
-                                    <div class="col-md-11 col-sm-11 col-xs-11">
-                                        <input type="submit" class="btn btn-info m-lg-4 m-4" ng-click="saveVisit()"
-                                            style="margin-right: 10px;">
-                                    
-                                    <button type="button" class="btn canc m-lg-4 m-4">
-                                        Cancel
-                                    </button>
-                                </div>
-                                </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="tab-pane mt-5" [class.active]="activeTab === 'tab2'" id="tab2"  >
-                            <form class="form-horizontal"[formGroup]="complianceForm">
-                                          
-                                <div class="col-lg-offset-1">
-                                <div class="form-group row">
-                                    <label for="taxLink" class="col-lg-2 col-4 col-form-label ml-2" >Courier Address :</label>
-                                    <div class="col-lg-4 col-8">
-                                        <select formControlName="product" class="form-select">
-                                            <option value="" selected>----------- Select Location ----------</option>
-                                            <option value="INTERESTED">INTERESTED </option>
-                                            <option value="NOT INTERESTED">NOT INTERESTED </option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                              
-
-                                <div class="form-group">
-                                    <div class="col-md-11 col-sm-11 col-xs-11">
-                                        <input type="submit" class="btn btn-info m-lg-4 m-4" ng-click="saveVisit()"
-                                            style="margin-right: 10px;">
-                                    
-                                    <button type="button" class="btn canc m-lg-4 m-4">
-                                        Cancel
-                                    </button>
-                                </div>
-                                </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
+          </li>
+          <!-- <li class="breadcrumb-item"><a href="#">Settings</a></li> -->
+          <li class="breadcrumb-item active" aria-current="page">TID Generation</li>
+        </ol>
+      </nav>
+      <div class="container ">
+        <div class="row">
+          <div class="col">
+            <div class="page-header">
+              <h1>
+                  TID Generation
+              </h1>
+            </div>
+            <div>
+            <button type="button" routerLink="/set/alltid" class="btn btn-info" style="float: right;">
+              View All TID's</button>
             </div>
 
 
-              
-<!-- 
-              <div  id="addStatus">
-               <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="nav-tabs-custom">
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a aria-expanded="true" href="#tab1" data-toggle="tab">Update Status</a></li>
-                    <li class=""><a aria-expanded="false" href="#tab2" data-toggle="tab">Update Courier Details</a></li>
+            <div class="col-md-12 col-sm-12 col-xs-12 box">
+              <div class="nav-tabs-custom" >
+                  <ul class="nav nav-tabs " >
+                      <!-- <li class="active"><a aria-expanded="true" href="#tab1" data-toggle="tab"
+                             >All Visits</a></li>
+                      <li class="" ><a aria-expanded="false" href="#tab2"
+                              data-toggle="tab">Add Visit Details</a></li> -->
+
+                              <li [class.active]="activeTab === 'tab1'"><a (click)="changeTab('tab1')" > 
+                                  Update Status</a></li>
+                              <li [class.active]="activeTab === 'tab2'" ><a (click)="changeTab('tab2')">Update Courier Details</a></li>
                   </ul>
-                  
                   <div class="tab-content">
-                      
-                         <div class="tab-pane active" id="tab1">
-                              
-                                 <form class="form-horizontal">
-                                  <input type="hidden" id="tID" ng-model="tidStatus.tID"  />
-                                  
-                                    <div class="form-group">
-                                      <label class="col-sm-2 control-label">Status</label>
-                                      <div class="col-sm-4">
-                                        <select class="form-control" id="status" required ng-model="tidStatus.status">
-                                          <option value="">--Select-- </option>
-                                          <option value="Pending">Pending</option>
+                      <div class="tab-pane active mt-5" [class.active]="activeTab === 'tab1'" id="tab1">
+                          <form class="form-horizontal"[formGroup]="complianceForm" ((ngSubmit))="onSubmit()">
+                              <div class="col-lg-offset-1">
+
+                              <div class="form-group row">
+                                  <label for="taxLink" class="col-lg-1 col-4 col-form-label ml-2" >Status :</label>
+                                  <div class="col-lg-4 col-8">
+                                      <select formControlName="status" [(ngModel)]="tidstatus.status" class="form-select">
+                                          <option value="" selected>----------- Select----------</option>
+                                          <option value="Pending">Pending </option>
                                           <option value="Complete">Complete</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger"
-                                        id="btnStatus" ng-click="saveStatus()">Submit</button>
-                                        <button ng-click="clear()" class="btn bg-navy">Cancel</button>
-                                      </div>
-                                    </div>
-                                  </form>
-                          
-                        </div>
-                                
-                         <div class="tab-pane" id="tab2">
-                            <form class="form-horizontal">
-                                 <input type="hidden"   id="tID" ng-model="tidCourier.tID"  />
-                                <div class="form-group">
-                                  <label class="col-sm-2 control-label">Courier Address</label>
-                                  <div class="col-sm-4">
-                                    <select class="form-control select" required ng-model="tidCourier.selectedCourier">
-                                       <option value="" selected="selected">--Select--</option>
-                                        <option ng-repeat="item in courierData" value="{{item.courierID}}">{{item.courierName}}({{item.courierID}})</option>
-                                    </select>
+                                      </select>
                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger" id="btnCourier" ng-click="updateTIDCourier()">Submit</button>
-                                    <button ng-click="clear()" class="btn bg-navy">Cancel</button>
-                                  </div>
-                                </div>
+                              </div>
+
+                            
+
+                              <div class="form-group">
+                                  <div class="col-md-11 col-sm-11 col-xs-11">
+                                      <input type="submit" class="btn btn-info m-lg-4 m-4" (click)="onSubmit()"  ng-click="saveVisit()"
+                                          style="margin-right: 10px;">
+                                  
+                                  <button type="button" class="btn canc m-lg-4 m-4">
+                                      Cancel
+                                  </button>
+                              </div>
+                              </div>
+                              </div>
                           </form>
-                        </div>
                       </div>
-            </div>
-          </div>
-      </div>
-             -->
-              
+
+                      <div class="tab-pane mt-5" [class.active]="activeTab === 'tab2'" id="tab2"  >
+                          <form class="form-horizontal"[formGroup]="complianceForm"  ((ngSubmit))="onSubmit1()">
+                            <!-- courierId -->
+                              <div class="col-lg-offset-1">
+                              <div class="form-group row">
+                                  <label for="taxLink" class="col-lg-2 col-4 col-form-label ml-2" >Courier Address :</label>
+                                  <div class="col-lg-4 col-8">
+                                      <select formControlName="courierId" [(ngModel)]="tidstatus.courierId" class="form-select">
+                                          <option value="" selected>----------- Select Location ----------</option>
+                                          <option value="1">INTERESTED </option>
+                                          <option value="0">NOT INTERESTED </option>
+                                      </select>
+                                  </div>
+                              </div>
+
+                            
+
+                              <div class="form-group">
+                                  <div class="col-md-11 col-sm-11 col-xs-11">
+                                      <input type="submit" class="btn btn-info m-lg-4 m-4" (click)="onSubmit1()" ng-click="saveVisit()"
+                                          style="margin-right: 10px;">
+                                  
+                                  <button type="button" class="btn canc m-lg-4 m-4">
+                                      Cancel
+                                  </button>
+                              </div>
+                              </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
               </div>
+          </div>
+
+
+            
+<!-- 
+            <div  id="addStatus">
+             <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a aria-expanded="true" href="#tab1" data-toggle="tab">Update Status</a></li>
+                  <li class=""><a aria-expanded="false" href="#tab2" data-toggle="tab">Update Courier Details</a></li>
+                </ul>
+                
+                <div class="tab-content">
+                    
+                       <div class="tab-pane active" id="tab1">
+                            
+                               <form class="form-horizontal">
+                                <input type="hidden" id="tID" ng-model="tidStatus.tID"  />
+                                
+                                  <div class="form-group">
+                                    <label class="col-sm-2 control-label">Status</label>
+                                    <div class="col-sm-4">
+                                      <select class="form-control" id="status" required ng-model="tidStatus.status">
+                                        <option value="">--Select-- </option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Complete">Complete</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                      <button type="submit" class="btn btn-danger"
+                                      id="btnStatus" ng-click="saveStatus()">Submit</button>
+                                      <button ng-click="clear()" class="btn bg-navy">Cancel</button>
+                                    </div>
+                                  </div>
+                                </form>
+                        
+                      </div>
+                              
+                       <div class="tab-pane" id="tab2">
+                          <form class="form-horizontal">
+                               <input type="hidden"   id="tID" ng-model="tidCourier.tID"  />
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label">Courier Address</label>
+                                <div class="col-sm-4">
+                                  <select class="form-control select" required ng-model="tidCourier.selectedCourier">
+                                     <option value="" selected="selected">--Select--</option>
+                                      <option ng-repeat="item in courierData" value="{{item.courierID}}">{{item.courierName}}({{item.courierID}})</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <button type="submit" class="btn btn-danger" id="btnCourier" ng-click="updateTIDCourier()">Submit</button>
+                                  <button ng-click="clear()" class="btn bg-navy">Cancel</button>
+                                </div>
+                              </div>
+                        </form>
+                      </div>
+                    </div>
+          </div>
+        </div>
+    </div>
+           -->
+            
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>

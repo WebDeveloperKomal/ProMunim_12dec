@@ -89,10 +89,16 @@
               <div class="dataTables_info mt-3" style="font-size: 14px;" id="branch_datatable_info" role="status"
                 aria-live="polite">
                 Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-                  collectionSize}} of {{dataarray.length}} entries </div>
-                  <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
-                    aria-label="Default pagination"></ngb-pagination>
-
+                  pageSize}} of {{couriorList.length}} entries </div>
+                  <!-- <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
+                    aria-label="Default pagination"></ngb-pagination> -->
+                    <ngb-pagination
+                    [collectionSize]="collectionSize"
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    (pageChange)="refreshCountries()"
+                  >
+                  </ngb-pagination>
               </div>
             </div>
           </div>

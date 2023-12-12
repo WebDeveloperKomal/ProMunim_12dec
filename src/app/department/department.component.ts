@@ -33,6 +33,10 @@ export class DepartmentComponent {
     this.apiService.allDepartments().subscribe(
       (response:any)=>{
         this.departmentList=response.data;
+        console.log('val',response.data );
+        this.collectionSize = response.data.length
+        
+        this.collectionSize = response.data.length;
       },
       (error:any)=>{
         console.error(error);
@@ -83,14 +87,24 @@ export class DepartmentComponent {
 
 
 applyFilter(): void {
-  // const searchString = this.SearchText.toLowerCase();
-  // const filteredData = [...this.dataarray];
-  // this.dataarray = filteredData.filter((data) =>
-  //   data.branchname.toLowerCase().includes(searchString) ||
-  //   data.branchcode.toLowerCase().includes(searchString) ||
-  //   data.branchcity.toLowerCase().includes(searchString) ||
-  //   data.branchaddress.toLowerCase().includes(searchString)
-  // );
+ if(!this.SearchText){
+  this.departmentList = [...this.departmentList]
+  return ;
+ }
+
+const searchstring = this.SearchText.toLowerCase();
+this.departmentList = this.departmentList.filter((data) =>
+   data.departmentName.toLowerCase().includes(searchstring)||
+   data.mainDepName.toLowerCase().includes(searchstring)
+
+)
+
+//  const searchString = this.SearchText.toLowerCase();
+//   this.complianceList = this.complianceList.filter((data) =>
+//     data.complianceName.toLowerCase().includes(searchString) ||
+//     data.taxLink.toLowerCase().includes(searchString) ||
+//     data.complianceDueDate.toLowerCase().includes(searchString)
+//   );
 }
 refreshCountries() {
   this.countries = this.dataarray

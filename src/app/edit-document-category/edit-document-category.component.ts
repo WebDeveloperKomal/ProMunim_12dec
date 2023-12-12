@@ -52,7 +52,9 @@ export class EditDocumentCategoryComponent {
     console.log('data ready to send :::: ',type);
     
     this.apiService.addType(type).subscribe(
-      (res:any)=>{console.log(res);window.location.reload();},
+      (res:any)=>{console.log(res);
+        // window.location.reload();
+      },
       (err:any)=>{console.error(err);}
     )
   }

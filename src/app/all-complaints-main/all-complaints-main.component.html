@@ -1,4 +1,137 @@
-<!-- <div class="container-fluid">
+<!-- 
+
+               <div class="container-fluid">
+                <div class="row">
+                  <div class="col">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                          <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
+                        </li>
+                      
+                        <li class="breadcrumb-item active" aria-current="page"> Customer Complaints</li>
+                      </ol>
+                    </nav>
+                    <div class="container ">
+                      <div class="row">
+                        <div class="col">
+                          <div class="page-header">
+                            <h1>
+                                Customer Complaints
+                            </h1>
+                          </div>
+                          <div>
+                            <button type="button" routerLink="/set/add-customer-complaints" class="btn btn-info" style="float: right;">
+                                Add Customer Complaints</button>
+                            </div>
+              
+                
+              
+
+            
+<div id="branch_datatable_wrapper box" class="dataTables_wrapper no-footer">
+    <div class="row box">
+      <div class="col-lg-9 col-md-8 ">
+        <div class="dataTables_length" id="branch_datatable_length">
+          <p>Show
+            <select name="branch_datatable_length" (ngModelChange)="refreshCountries()" [(ngModel)]="pageSize"
+              aria-controls="branch_datatable">
+          
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="25">25</option>
+              <option [ngValue]="50">50</option>
+              <option [ngValue]="100">100</option>
+            </select> entries
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <div class="dataTables_filter" id="branch_datatable_filter">
+          <p>Search:
+            <input type="text" [(ngModel)]="SearchText" (input)="applyFilter()" placeholder=""
+              aria-controls="branch_datatable">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Ticket Id: activate to sort column descending"
+                        style="width: 168px;" aria-sort="ascending">Ticket Id</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Account No: activate to sort column ascending"
+                        style="width: 212px;">Account No</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Company Name: activate to sort column ascending"
+                        style="width: 271px;">Company Name</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Subject: activate to sort column ascending"
+                        style="width: 157px;">Subject</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Status: activate to sort column ascending"
+                        style="width: 141px;">Status</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Date: activate to sort column ascending"
+                        style="width: 122px;">Date</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Branch: activate to sort column ascending"
+                        style="width: 154px;">Branch</th>
+                    <th class="sorting" tabindex="0" aria-controls="complaints_datatable"
+                        rowspan="1" colspan="1"
+                        aria-label="Action: activate to sort column ascending"
+                        style="width: 143px;">Action</th>
+                </tr>
+               
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let data of dataarray  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
+               
+                    <td>{{data.branchcustname}}</td>
+                    <td>{{data.branchcustname}}</td>
+                    <td>{{data.branchcity}}</td>
+                    
+                    <td>{{data.branchaddress}}</td>
+                   
+                    <td>{{data.emiid}}</td>
+                    <td>{{data.branchcode}}</td>
+                    <td>{{data.branchname}}</td>
+                    <td>
+                      
+                      <button class="btn" style=" background-color:#003974!important; color: white;padding-left: 12px; padding-right: 12px;" routerLink="/set/view-customer-complaints-main" >
+                        View
+                    </button>
+                        
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <div class="dataTables_info mt-3" style="font-size: 14px;" id="branch_datatable_info" role="status"
+                  aria-live="polite">
+                  Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
+                    collectionSize}} of {{dataarray.length}} entries </div>
+                    <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
+                      aria-label="Default pagination"></ngb-pagination>
+  
+                </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="container-fluid">
     <div class="row">
       <div class="col">
         <nav aria-label="breadcrumb">
@@ -130,20 +263,19 @@
                 </thead>
                 <tbody>
                   <tr
-                    *ngFor="let data of dataarray  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
+                    *ngFor="let data of complaintList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
                     <!-- <td>{{index+1}}</td> -->
-                    <td>{{data.branchcustname}}</td>
-                    <td>{{data.branchcustname}}</td>
-                    <!-- <td>{{data.branchcustname}}</td> -->
-                    <!-- <td>{{data.branchid}}</td> -->
-                    
-                    <td>{{data.branchcity}}</td>
-                    
-                    <td>{{data.branchaddress}}</td>
+                    <td>{{data.ticketId}}</td>
+                    <td>{{data.accountNo}}</td>
+                    <td>{{data.companyName}}</td>
+                    <td>{{data.subject}}</td>
+                    <td>{{data.status}}</td>
+                    <td>{{data.date}}</td>
+                    <td>{{data.branch}}</td>
                    
-                    <td>{{data.emiid}}</td>
-                    <td>{{data.branchcode}}</td>
-                    <td>{{data.branchname}}</td>
+                    <!-- <td>{{data.emiid}}</td> -->
+                    <!-- <td>{{data.branchcode}}</td> -->
+                    <!-- <td>{{data.branchname}}</td> -->
                     <td>
                         <!-- <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/" >
                             <i class="ace-icon fa fa-info bigger-120"></i>
@@ -163,7 +295,7 @@
                 <div class="dataTables_info mt-3" style="font-size: 14px;" id="branch_datatable_info" role="status"
                   aria-live="polite">
                   Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-                    collectionSize}} of {{dataarray.length}} entries </div>
+                    pageSize}} of {{complaintList.length}} entries </div>
                     <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
                       aria-label="Default pagination"></ngb-pagination>
   

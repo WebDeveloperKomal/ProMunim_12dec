@@ -27,6 +27,7 @@ ngOnInit(){
   this.apiService.allProductfees().subscribe(
   (response:any)=>{
     this.ProductFeeList = response.data;
+    this.collectionSize = response.data.length
   },
   (error:any)=>{
     console.error(error);

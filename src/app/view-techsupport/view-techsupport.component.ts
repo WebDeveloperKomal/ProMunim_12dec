@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { ViewTechSupportModel } from './view-techsupport.component.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../api.service';
+import { ActivatedRoute } from '@angular/router';
+import { TechSupportModel } from '../tech-support/tech-support.component.model';
 
 @Component({
   selector: 'app-view-techsupport',
@@ -7,69 +11,85 @@ import { ViewTechSupportModel } from './view-techsupport.component.model';
   styleUrls: ['./view-techsupport.component.css']
 })
 export class ViewTechsupportComponent {
-  SearchText : any ;
-  branchid : number | undefined;
-  branchname : any;
-  branchcode: any;
-  branchcity: any;
-  branchaddress : any;
-  page = 1;
-  pageSize = 10 ;
-  dataarray: ViewTechSupportModel[] = [];
-  currentPage: number = 1;
-  countries: ViewTechSupportModel[] | undefined;
-  collectionSize =100;
-  constructor() {
-  this.dataarray = [
-    {branchid : 1, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'Quisque lobortis purus vel sollicitudin malesuada. Fusce ornare, elit vel porta tempus, arcu lacus sagittis arcu, nec elementum massa arcu a est. Curabitur euismod arcu id urna convallis, ut tincidunt lectus euismod'  },
-    {branchid : 2, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'Please generate my CRM Id'  },
-    {branchid : 3, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'PAN field'  },
-    {branchid : 4, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'Bank Detail information'  },
-    {branchid : 5, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'Test'  },
-    {branchid : 6, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'Next Appointment Date Issue'  },
-    {branchid : 7, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'SEARCH BOX UNDER EMPLOYEE BUTTON'  },
-    {branchid : 8, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'Customer interaction not getting updated'  },
-    {branchid : 9, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 10, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'CRM not working'  },
-    {branchid : 11, branchname :'2018-06-28' ,branchcode :'sameer.kulkari@ibgfincon.com' , branchcity :'PUNE' , branchaddress:'all client report required with customer ID, email ID and telephone number'  },
-    {branchid : 12, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 13, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 14, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 15, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 16, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 17, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 18, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  }, {branchid : 1, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 19, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 20, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 21, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 22, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 23, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 24, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 25, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 26, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 27, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 28, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 29, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 30, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 31, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 32, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-   ]
+  techSupport !: FormGroup;
+
+  viewtechSupport:TechSupportModel[] = [];
+  replay : ViewTechSupportModel = new ViewTechSupportModel();
+  data1={
+    date: "",
+    subject: "",
+    insertBy: "",
+    ticketId: 0
+  };
+  data2=[{
+    date: "",
+    replyById: 0,
+    replyId: 0,
+    reply: "",
+    replyBy: "",
+    ticketId: 0
+  }];
+  empId:any;
+ 
+  id!:number;
+
+  constructor(private formBuilder: FormBuilder ,private apiService : ApiService, private route:ActivatedRoute) {
+    this.techSupport = this.formBuilder.group({
+      date: ['', Validators.required], // Add validation if needed 
+      subject: ['', Validators.required], // Add validation if needed
+      insertBy: ['', Validators.required], // Add validation if needed
+      ticketId: ['', Validators.required], // Add validation if needed
+      reply: ['', Validators.required], // Add validation if needed
+    });
 }
 
-applyFilter(): void {
-  const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  this.dataarray = filteredData.filter((data) =>
-    data.branchname.toLowerCase().includes(searchString) ||
-    data.branchcode.toLowerCase().includes(searchString) ||
-    data.branchcity.toLowerCase().includes(searchString) ||
-    data.branchaddress.toLowerCase().includes(searchString)
+ngOnInit(){
+  this.id = this.route.snapshot.params['id'];
+  console.log(this.id);
+  
+  this.apiService.allreplayByID(this.id).subscribe(
+    ( data: any) => {
+      this.data1=data.data1;
+      this.data2=data.data2;
+      console.log('Response successful!');
+      console.log(this.data1);
+      console.log(this.data2);
+
+    },
+    (error:any) => {
+      console.error('API Error:', error);
+    }
   );
 }
-refreshCountries() {
-  this.countries = this.dataarray
-    .map((country, i) => ({id: i + 1, ...country}))
-    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+
+onSubmit(){ 
+  this.replay.ticketId=this.id;
+  console.log('replay send::::: ',this.replay);
+  this.apiService.addreplay(this.replay).subscribe(
+    (response:any)=>{
+      console.log(response.data);
+      window.location.reload();
+    },
+    (error:any)=>{
+      console.error(error);        
+    }
+  )
 }
 
+
+applyFilter(): void {
+  // const searchString = this.SearchText.toLowerCase();
+  // const filteredData = [...this.dataarray];
+  // this.dataarray = filteredData.filter((data) =>
+  //   data.branchname.toLowerCase().includes(searchString) ||
+  //   data.branchcode.toLowerCase().includes(searchString) ||
+  //   data.branchcity.toLowerCase().includes(searchString) ||
+  //   data.branchaddress.toLowerCase().includes(searchString)
+  // );
+}
+refreshCountries() {
+  // this.countries = this.dataarray
+  //   .map((country, i) => ({id: i + 1, ...country}))
+  //   .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+}
 }

@@ -14,9 +14,9 @@ export class CourierdetailsComponent {
 
   page = 1;
   pageSize = 10 ;
-  dataarray: courierdetailsModel [] = [];
+  // dataarray: courierdetailsModel [] = [];
   currentPage: number = 1;
-  countries: courierdetailsModel [] | undefined;
+  // countries: courierdetailsModel [] | undefined;
   collectionSize =100;
 
   couriorList:courierdetailsModel[]=[];
@@ -27,6 +27,7 @@ export class CourierdetailsComponent {
     this.apiService.allCouriors().subscribe(
       (response:any)=>{
         this.couriorList=response.data;
+        this.collectionSize = response.data.length;
       },
       (error:any)=>{
         console.error(error);        
@@ -76,16 +77,19 @@ export class CourierdetailsComponent {
 
 applyFilter(): void {
   const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  // this.dataarray = filteredData.filter((data) =>
-  //   data.branchname.toLowerCase().includes(searchString) ||
-  //   data.branchcode.toLowerCase().includes(searchString) ||
-  //   data.branchcity.toLowerCase().includes(searchString) ||
-  //   data.branchaddress.toLowerCase().includes(searchString)
-  // );
+  const filteredData = [...this.couriorList];
+  this.couriorList = filteredData.filter((data) =>
+    data.name.toLowerCase().includes(searchString) ||
+    data.address.toLowerCase().includes(searchString) ||
+    data.phoneNo.toLowerCase().includes(searchString) ||
+    data.fax.toLowerCase().includes(searchString) ||
+    data.emailId.toLowerCase().includes(searchString)
+
+    
+  );
 }
 refreshCountries() {
-  this.countries = this.dataarray
+  this.couriorList = this.couriorList
     .map((country, i) => ({id: i + 1, ...country}))
     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
 }

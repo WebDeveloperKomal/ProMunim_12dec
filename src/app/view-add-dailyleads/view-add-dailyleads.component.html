@@ -26,16 +26,17 @@
 
 
                         <div class="col-md-12 col-sm-12 col-xs-12 box">
-                            <div class="nav-tabs-custom" >
-                                <ul class="nav nav-tabs" >
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
                                     <!-- <li class="active"><a aria-expanded="true" href="#tab1" data-toggle="tab"
                                            >All Visits</a></li>
                                     <li class="" ><a aria-expanded="false" href="#tab2"
                                             data-toggle="tab">Add Visit Details</a></li> -->
 
-                                            <li [class.active]="activeTab === 'tab1'"><a (click)="changeTab('tab1')" > All
-                                                Leads</a></li>
-                                            <li [class.active]="activeTab === 'tab2'"><a (click)="changeTab('tab2')">Add Lead Details</a></li>
+                                    <li [class.active]="activeTab === 'tab1'"><a (click)="changeTab('tab1')"> All
+                                            Leads</a></li>
+                                    <li [class.active]="activeTab === 'tab2'"><a (click)="changeTab('tab2')">Add Lead
+                                            Details</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" [class.active]="activeTab === 'tab1'" id="tab1">
@@ -49,68 +50,71 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let data of dataarray ,let index = index ">
-                                                <td>{{index+1}}</td>
-                                               
-                                                <td>{{data.branchname}}</td>
-                                                <td>{{data.branchcode}}</td>
-                                                
-                                                <td>{{data.branchcity}}</td>
-                                              </tr>
+                                                <tr *ngFor="let data of dlStatusList ,let index = index ">
+                                                    <td>{{index+1}}</td>
+
+                                                    <td>{{data.visit_date}}</td>
+                                                    <td>{{data.description}}</td>
+
+                                                    <td>{{data.next_visit_date}}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
 
-                                    <div class="tab-pane mt-5" [class.active]="activeTab === 'tab2'" id="tab2"  >
-                                        <form class="form-horizontal"[formGroup]="viewadddailyleads">
-                                          
-
+                                    <div class="tab-pane mt-5" [class.active]="activeTab === 'tab2'" id="tab2">
+                                        <form class="form-horizontal" [formGroup]="viewadddailyleads">
                                             <div class="form-group row mb-3">
-                                                <label for="complianceDueDate" class="col-lg-2 col-4 col-form-label">Visit Date:</label>
+                                                <p>ID : {{lead.tmpCustId}} name : {{lead.description}}</p>
+                                                <label for="visitDate" class="col-lg-2 col-4 col-form-label">Visit
+                                                    Date:</label>
                                                 <div class="col-lg-4 col-8">
-                                                    <input type="date" formControlName="visitedate" class="form-control"
+                                                    <input type="date" formControlName="visitDate"
+                                                        [(ngModel)]="lead.visitDate" class="form-control"
                                                         id="complianceDueDate">
                                                 </div>
 
 
-                                                <label for="address" class="col-lg-1 col-4   col-form-label mr-5">Description</label>
+                                                <label for="address"
+                                                    class="col-lg-1 col-4   col-form-label mr-5">Description</label>
                                                 <div class="col-lg-4 col-8">
-                                                   
-                                                        <textarea class="form-control" id="address" rows="3" formControlName="description"
-                                                            required> </textarea>
-                                            
+
+                                                    <textarea class="form-control" id="address"
+                                                        [(ngModel)]="lead.description" rows="3"
+                                                        formControlName="description" required> </textarea>
+
                                                 </div>
-                        
+
                                             </div>
 
-                                               
+
 
 
                                             <div class="form-check mb-3 was-validated">
 
-                                                <label class="form-check-label" for="myCheck">Is Next
+                                                <label class="form-check-label" for="isnxt">Is Next
                                                     Date:</label>
-                                                <input class="form-check-input" type="checkbox" id="myCheck"
-                                                    name="remember" required >
-                                                    
-                                                <div class="valid-feedback" >
-                                                   
+                                                <input class="form-check-input" type="checkbox" formControlName="isnxt"
+                                                    [(ngModel)]="lead.isnxt" id="myCheck" name="isnxt" required>
+
+                                                <div class="valid-feedback">
+
                                                     <div class="form-group row mb-3">
 
-                                                        <label for="complianceDueDate"
+                                                        <label for="nextVisitDate"
                                                             class="col-lg-2 col-4 col-form-label ml-2">Next
                                                             Visit Date:</label>
                                                         <div class="col-lg-4 col-8">
-                                                            <input type="date"
-                                                                formControlName="nextvisitdate"
-                                                                class="form-control" id="complianceDueDate">
+                                                            <input type="date" [(ngModel)]="lead.nextVisitDate"
+                                                                formControlName="nextVisitDate" class="form-control"
+                                                                id="complianceDueDate">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="invalid-feedback"></div> -->
                                             </div>
 
-                                          
+
 
                                             <!-- <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <p><b>Note : </b>Once you select status INTERESTED then this customer
@@ -132,17 +136,18 @@
                                                     Reset
                                                 </button>
                                             </div> -->
-                                            
-                                <div class="form-group" >
-                                    <div class="col-md-11 col-sm-11 col-xs-11" >
-                                        <input type="submit" class="btn btn-info m-lg-4 m-4" ng-click="saveVisit()"
-                                            style="margin-right: 10px;">
-                                    
-                                    <button type="button" class="btn canc m-lg-4 m-4">
-                                        Cancel
-                                    </button>
-                                </div>
-                                </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-11 col-sm-11 col-xs-11">
+                                                    <input type="submit" class="btn btn-info m-lg-4 m-4"
+                                                        (click)="onSubmit()" ng-click="saveVisit()"
+                                                        style="margin-right: 10px;">
+
+                                                    <button type="button" class="btn canc m-lg-4 m-4">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

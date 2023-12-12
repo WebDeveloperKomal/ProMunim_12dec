@@ -34,7 +34,7 @@
 
                             <label for="complianceDueDate" class="col-lg-2 col-4 control-label">Date:</label>
                             <div class="col-lg-6 col-md-8 col-8 ">
-                                <input type="date" formControlName="date" class="form-control"
+                                <input type="date" formControlName="date" [(ngModel)]="addtid.date" class="form-control"
                                     id="complianceDueDate">
 
                             </div>
@@ -43,7 +43,7 @@
                         <div class="form-group row mb-3 text-end">
                             <label for="complianceDueDate" class="col-lg-2 col-4 control-label">Subject: *</label>
                             <div class="col-lg-6 col-8">
-                                <input class="form-control" id="address" rows="3" formControlName="subject" required>
+                                <input class="form-control" id="address" rows="3" formControlName="subject" [(ngModel)]="addtid.subject" required>
                                 <!-- <input type="text" formControlName="complianceDueDate" class="form-control"
                 id="complianceDueDate"> -->
                             </div>
@@ -52,7 +52,7 @@
                         <div class="form-group row text-end">
                             <label for="complianceDueDate" class="col-lg-2 col-4 control-label">Description :</label>
                             <div class="col-lg-6 col-8">
-                                <textarea class="form-control" id="address" rows="3" formControlName="description"
+                                <textarea class="form-control" id="address" rows="3" formControlName="description" [(ngModel)]="addtid.description"
                                     required> </textarea>
                                 <!-- <select class="form-select" formControlName="tempcustname" id="status" ng-model="techSupport.ticketTo" required="">
                      <option value="">----------- Select ----------- </option>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="text-center mt-5">
                             <!-- <div class="col-sm-offset-3 col-md-9"> -->
-                            <button type="button" class="btn btn-info  m-lg-4 m-4"><i
+                            <button type="button" class="btn btn-info  m-lg-4 m-4" (click)="onSubmit()"><i
                                     class="ace-icon fa fa-check bigger-110"></i>
                                 Submit</button>
                             <button type="button" class="btn canc m-lg-4 m-4">

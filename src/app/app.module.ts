@@ -76,7 +76,8 @@ import { SetComponent } from './set/set.component';
 import { LoginComponent } from './login/login.component';
 import { ViewBranchComponent } from './view-branch/view-branch.component'
 import { AuthInterceptorProviders } from './auth.interceptor';
-import{CarouselModule} from 'ngx-bootstrap/carousel'
+import{CarouselModule} from 'ngx-bootstrap/carousel';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -157,7 +158,7 @@ import{CarouselModule} from 'ngx-bootstrap/carousel'
     CarouselModule.forRoot()
     // NgbModule.forRoot()
   ],
-  providers: [AuthInterceptorProviders],
+  providers: [AuthInterceptorProviders,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

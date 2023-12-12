@@ -4,6 +4,7 @@ import { ProductsModel } from '../products/products.component.model';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { viewProductsModel } from './view-product.component.model';
 
 @Component({
   selector: 'app-view-product',
@@ -15,13 +16,13 @@ export class ViewProductComponent {
   viewproductForm !: FormGroup;
   dataarray: any[] = [];
   data:ProductsModel = new ProductsModel();
-  product:ProductsModel = new ProductsModel();
+  product:viewProductsModel = new viewProductsModel();
   id!:number;
 
   constructor(private formBuilder: FormBuilder, private apiService:ApiService, private route:ActivatedRoute) {
     this.viewproductForm = this.formBuilder.group({
-      productId: ['', Validators.required], // Add validation if needed
-      productName: ['', Validators.required], // Add validation if needed
+      productId: ['', Validators.required], 
+      productName: ['', Validators.required], 
       minValue: ['', Validators.required],
       maxValue: ['', Validators.required]
     
@@ -33,10 +34,22 @@ export class ViewProductComponent {
     this.apiService.ProductById(this.id).subscribe(
       (res:any)=>{
         this.data = res.data;
-        this.product.productId = this.data.productId;
-        this.product.productName = this.data.productName;
-        this.product.minValue = this.data.minValue;
-        this.product.maxValue = this.data.maxValue;
+        console.log('val' , res.data);
+        
+        // this.product.productId = this.data.productId;
+        // this.product.productName = this.data.productName;
+        // this.product.minValue = this.data.minValue;
+        // this.product.maxValue = this.data.maxValue;
+
+        this.viewproductForm.patchValue({
+          productName: res.data[0].productName
+          ,
+          productId:  res.data[0].productId , 
+          minValue: res.data[0].minValue ,
+          maxValue:  res.data[0].maxValue , 
+
+           
+        })
       },
       (err:any)=>{console.error(err);}
     )

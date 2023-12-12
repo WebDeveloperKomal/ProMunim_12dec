@@ -22,154 +22,45 @@
 
 
             <div class="container pb-2" style="border: 1px solid #8b98a1;">
-              <!-- <div class="row"> -->
 
-                <form [formGroup]="employeeForm" class=" col-md-12 col-sm-12 col-xs-12 mt-5">
+                <form [formGroup]="invoiceSearch" class=" col-md-12 col-sm-12 col-xs-12 mt-5">
                   <div class="row">
                     <div class="col-lg-2 col-md-10 col-11 m-3 m-lg-0">
                       <label for="location">Select Branch :</label>
-                      <select formControlName="location" class="form-select ">
+                      <select formControlName="branch" class="form-select " >
 
-                        <option value="">---Select Status---</option>
-                        <option value="1001">Hadapsar</option>
+                        <option value="">---Select Branch---</option>
+                        <option *ngFor="let branch of branches" value={{branch.branchName}}>{{branch.branchName}}</option>
 
-                        <option value="1010">Solapur</option>
-
-                        <option value="1020">Daund</option>
-
-                        <option value="1040">Katraj</option>
-
-                        <option value="1030">Phaltan</option>
-
-                        <option value="1050">Sinhgad Road</option>
-
-                        <option value="1060">Ahmednagar</option>
-
-                        <option value="1070">Satara</option>
-
-                        <option value="1080">Lohegaon</option>
-
-                        <option value="1090">Bhosari</option>
-
-                        <option value="1100">Pimpri</option>
-
-                        <option value="1550">Kunjirwadi</option>
-
-                        <option value="1110">Chinchwad</option>
-
-                        <option value="1120">Kolhapur</option>
-
-                        <option value="1140">Nagpur</option>
-
-                        <option value="1130">Ratnagiri</option>
-
-                        <option value="1150">Aurangabad</option>
-
-                        <option value="1160">Nashik</option>
-
-                        <option value="1170">Navi Mumbai</option>
-
-                        <option value="1180">Mumbai</option>
-
-                        <option value="1190">Panaji</option>
-
-                        <option value="1200">Ahmadabad</option>
-
-                        <option value="1230">Chennai</option>
-
-                        <option value="1220">Amaravati</option>
-
-                        <option value="1210">Bengaluru</option>
-
-                        <option value="1240">Kochi</option>
-
-                        <option value="1250">Hyderabad</option>
-
-                        <option value="1260">Ranchi</option>
-
-                        <option value="1270">Bhopal</option>
-
-                        <option value="1280">Patna</option>
-
-                        <option value="1290">Raipur</option>
-
-                        <option value="1300">Jaipur</option>
-
-                        <option value="1310">Kolkata</option>
-
-                        <option value="1320">Lucknow</option>
-
-                        <option value="1330">Chandigarh</option>
-
-                        <option value="1340">Bhubaneshwar</option>
-
-                        <option value="1350">Agartala</option>
-
-                        <option value="1360">Gangtok</option>
-
-                        <option value="1370">Kohima</option>
-
-                        <option value="1380">Aizawl</option>
-
-                        <option value="1390">Shillong</option>
-
-                        <option value="1400">Imphal</option>
-
-                        <option value="1410">Dehradun</option>
-
-                        <option value="1420">Shimla</option>
-
-                        <option value="1430">Gurgoan</option>
-
-                        <option value="1440">Guwahati</option>
-
-                        <option value="1450">Itanagar</option>
-
-                        <option value="1460">Andaman</option>
-
-                        <option value="1470">Daman</option>
-
-                        <option value="1480">Jammu</option>
-
-                        <option value="1490">Kashmir</option>
-
-                        <option value="1500">Andrott</option>
-
-                        <option value="1510">Leh</option>
-
-                        <option value="1520">Puducherry</option>
-
-                        <option value="1530">Connaught Place</option>
-
-                        <option value="1540">Indore</option>
-
+                        
                       </select>
                     </div>
 
-                    <div class=" col-lg-2 col-md-10  col-11 m-3 m-lg-0 form-group">
+                    <!-- <div class=" col-lg-2 col-md-10  col-11 m-3 m-lg-0 form-group">
                       <label for="maindepartment">RM Code</label>
                       <select class="form-select">
                         <option value="">---Select Status---</option>
                       </select>
 
-                    </div>
+                    </div> -->
 
                     <div class="col-lg-3 col-md-10  col-11 m-3 m-lg-0 form-group">
                       <label for="department">From Date</label>
-                      <input type="date" formControlName="department" class="form-control">
+                      <input type="date" formControlName="fromDate" class="form-control">
                     </div>
 
                     <div class="col-lg-3 col-md-10  col-11 m-3 m-lg-0 form-group">
                       <label for="department">To Date</label>
-                      <input type="date" formControlName="department" class="form-control">
+                      <input type="date" formControlName="toDate" class="form-control">
                     </div>
                     <div class=" col-lg-2 col-md-10  col-11 m-3 m-lg-0 form-group">
                       <label for="maindepartment">Status</label>
-                      <select class="form-select">
+                      <select class="form-select" formControlName="status">
                         <option value="">---Select Status---</option>
-                        <option value="1">Partial</option>
-                        <option value="2">Paid</option>
-                        <option value="3">Unpaid</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Partial">Partial</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Unpaid">Unpaid</option>
                       </select>
 
                     </div>
@@ -178,7 +69,7 @@
                   </div>
                   <div class="row ">
                     <div class="text-end">
-                        <button type="button" class="btn btn-info m-lg-3 m-4"><i class="ace-icon fa fa-check bigger-110"></i> Submit</button>
+                        <button type="button" class="btn btn-info m-lg-3 m-4" (click)="onSubmit()"><i class="ace-icon fa fa-check bigger-110" ></i> Submit</button>
                         <button type="button" class="btn canc m-lg-3 m-4"><i class="ace-icon fa fa-undo bigger-110"></i> Reset</button>
                     </div>
                 </div>
@@ -189,6 +80,100 @@
               <!-- </div> -->
 
             </div>
+
+            
+            <div class="container ">
+              <div class="row">
+                <div class="col">
+                  
+                  <div id="branch_datatable_wrapper" class="dataTables_wrapper no-footer">
+                    <div class="row" style="margin-top: 7%;">
+                      <div class="col-lg-9 col-md-8">
+                        <div class="dataTables_length" id="branch_datatable_length">
+                          <p>Show
+                            <select name="branch_datatable_length" (ngModelChange)="refreshCountries()" [(ngModel)]="pageSize"
+                              aria-controls="branch_datatable">
+                              <!-- [(ngModel)]="resultsPerPage" -->
+                              <option [ngValue]="10">10</option>
+                              <option [ngValue]="25">25</option>
+                              <option [ngValue]="50">50</option>
+                              <option [ngValue]="100">100</option>
+                            </select> entries
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-3">
+                        <div class="dataTables_filter" id="branch_datatable_filter">
+                          <p>Search:
+                            <input type="text" [(ngModel)]="SearchText" (input)="applyFilter()" placeholder=""
+                              aria-controls="branch_datatable">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th >Sr.No.</th>
+                        <th>Invoice ID</th>
+                        <th>Company Name</th>
+                        <th>Invoice Date</th>
+                        <th >Due Date</th>
+                        <th>Paid Date</th>
+                        <th>Total</th>
+                        <th> Branch</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                      *ngFor="let data of AllInvicesList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
+                      <td>{{index+1}}</td>
+                      <td>{{data.invoiceId}}</td>
+                      <td>{{data.CompanyName}}</td>
+                      <td>{{data.invoiceDate}}</td>
+                      <td>{{data.invoiceDueDate}}</td>
+                      <td>{{data.total}}</td>
+                      <td>{{data.balance}}</td>
+                      <td>{{data.branch}}</td>
+                      <td>{{data.status}}</td>
+
+                        <!-- <td>
+                          <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/set/view-branch" >
+                              <i class="ace-icon fa fa-pencil bigger-120"></i>
+                          </button>&nbsp;&nbsp;
+                          <button class="btn btn-xs" style=" font-size: 13px; background-color:#DC3545!important; color: white;" (click)="delete()" >
+                          
+                          <i class="fa-solid fa-trash-can"></i>
+                          </button>
+      
+                      </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="d-flex justify-content-between p-2">
+                    <div class="dataTables_info mt-3" style="font-size: 14px;" id="branch_datatable_info" role="status"
+                      aria-live="polite">
+                      Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
+                        collectionSize}} of {{dataarray.length}} entries </div>
+                        <ngb-pagination
+                        [collectionSize]="collectionSize"
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        (pageChange)="refreshCountries()"
+                      >
+                      </ngb-pagination>
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
           </div>
         </div>
       </div>

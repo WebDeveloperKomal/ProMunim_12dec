@@ -9,7 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AccountopeningFormComponent {
   step1 !: FormGroup ;
   activeTab: string = 'tab1';
-
+individual : boolean =true;
+nonindividual : boolean =false;
+selfemployee : boolean =false;
 
   constructor(private formBuilder: FormBuilder) {
 
@@ -51,6 +53,21 @@ export class AccountopeningFormComponent {
     this.activeTab = tabId;
   }
 
+  show1(){
+    this.individual = true;
+    this.nonindividual = false;
+    this.selfemployee = false;
+  }
+  show2(){
+    this.individual = false;
+    this.nonindividual = true;
+    this.selfemployee = false;
+  }
+  show3(){
+    this.individual = false;
+    this.nonindividual = false;
+    this.selfemployee = true;
+  }
 
 
 }

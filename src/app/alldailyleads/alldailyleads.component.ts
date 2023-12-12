@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AllDailyLeadsModel } from './alldailyleads.component.model';
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
+import { BranchModel } from '../branch/branch.component.model';
 
 @Component({
   selector: 'app-alldailyleads',
@@ -9,74 +12,86 @@ import { AllDailyLeadsModel } from './alldailyleads.component.model';
 })
 export class AlldailyleadsComponent {
   SearchText : any ;
-  branchid : number | undefined;
-  branchname : any;
-  branchcode: any;
-  branchcity: any;
-  branchaddress : any;
+ 
   page = 1;
   pageSize = 10 ;
   dataarray: AllDailyLeadsModel[] = [];
   currentPage: number = 1;
   countries: AllDailyLeadsModel[] | undefined;
   collectionSize =100;
-  employeeForm !: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
-    this.employeeForm = this.formBuilder.group({
-      location: ['', Validators.required], // Add validation if needed
-      maindepartment: ['', Validators.required], // Add validation if needed
-      department: ['', Validators.required] // Add validation if needed
+
+  leadsList:AllDailyLeadsModel[] = [];
+
+  dailyleadform !: FormGroup;
+  branches:BranchModel[]=[];
+  
+
+  constructor( private service: ApiService , private router:Router,private formBuilder: FormBuilder) {
+    this.dailyleadform = this.formBuilder.group({
+      branch: ['', Validators.required], 
+    
      
     });
-  this.dataarray = [
-    {branchid : 'alpesh jain', branchname :'hadapsar' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'MAHARASHTRA FURNITURE'  },
-    {branchid : 'R B YADVATE', branchname :'Hadapsar' ,branchcode :'9822014368' , branchcity :'SANTOSH DADAS' , branchaddress:'BALAJI ENTERPRISES'  },
-    {branchid : 'alpesh jain', branchname :'vluj' ,branchcode :'9822014368' , branchcity :'SANTOSH DADAS' , branchaddress:'BALAJI ENTERPRISES'  },
-    {branchid : 'R B YADVATE', branchname :'hemda' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'MAHARASHTRA FURNITURE'  },
-    {branchid : 'R B YADVATE', branchname :'aimndh' ,branchcode :'9822014368' , branchcity :'SANTOSH DADAS' , branchaddress:'baba ramdev auto spares'  },
-    {branchid : 'R B YADVATE', branchname :'sinhgad' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'baba ramdev auto spares'  },
-    {branchid : 'alpesh jain', branchname :'kothrud' ,branchcode :'9822014368' , branchcity :'SANTOSH DADAS' , branchaddress:'MAHARASHTRA FURNITURE'  },
-    {branchid : 'R B YADVATE', branchname :'karvenagar' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'baba ramdev auto spares'  },
-    {branchid : 'R B YADVATE', branchname :'Goa' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'baba ramdev auto spares'  },
-    {branchid : 'R B YADVATE', branchname :'banglore' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'MAHARASHTRA FURNITURE'  },
-    {branchid : 'R B YADVATE', branchname :'Hadapsar' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'baba ramdev auto spares'  },
-    {branchid : 'alpesh jain', branchname :'Hadapsar' ,branchcode :'9822014368' , branchcity :'SANTOSH DADAS' , branchaddress:'MAHARASHTRA FURNITURE'  },
-    {branchid : 'R B YADVATE', branchname :'Hadapsar' ,branchcode :'9822014368' , branchcity :'ARVIND GAIKWAD' , branchaddress:'baba ramdev auto spares'  },
-    {branchid : 'alpesh jain', branchname :'Hadapsar' ,branchcode :'9822014368' , branchcity :'SANTOSH DADAS' , branchaddress:'MAHARASHTRA FURNITURE'  },
-    {branchid : 15, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 16, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 17, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 18, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  }, {branchid : 1, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 19, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 20, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 21, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 22, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 23, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 24, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 25, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 26, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 27, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 28, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 29, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 30, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 31, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 32, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-   ]
 }
+
+ngOnInit(){
+  this.service.alldailyLead().subscribe(
+    ( data: any) => {
+      this.leadsList=data.data;
+      console.log('Response successful!', data.data);
+      this.collectionSize = data.data.length;
+    },
+    (error:any) => {
+      console.error('API Error:', error);
+    }
+  );
+
+  
+  this.service.allBranches().subscribe(
+    (responce:any)=>{
+      this.branches=responce.data;
+    },
+    (error:any)=>{
+      console.error(error);        
+    }
+  )
+}
+
+edit(id:any){
+  this.router.navigate(['/set/view-add-dailyLeads/'+id]);
+}
+
 
 applyFilter(): void {
   const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  this.dataarray = filteredData.filter((data) =>
-    data.branchname.toLowerCase().includes(searchString) ||
-    data.branchcode.toLowerCase().includes(searchString) ||
-    data.branchcity.toLowerCase().includes(searchString) ||
-    data.branchaddress.toLowerCase().includes(searchString)
+  const filteredData = [...this.leadsList];
+  this.leadsList = filteredData.filter((data) =>
+    data.company_name.toLowerCase().includes(searchString) ||
+    data.cust_name.toLowerCase().includes(searchString) ||
+    data.branch.toLowerCase().includes(searchString) ||
+    data.attendedByLN.toLowerCase().includes(searchString) ||
+    (data.contact_no !== null && !isNaN(data.contact_no) && data.contact_no.toString().includes(searchString)) ||
+    (data.customer_id !== null && !isNaN(data.customer_id) && data.customer_id.toString().includes(searchString)) 
+
   );
 }
 refreshCountries() {
-  this.countries = this.dataarray
-    .map((country, i) => ({id: i + 1, ...country}))
-    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  // this.countries = this.dataarray
+  //   .map((country, i) => ({id: i + 1, ...country}))
+  //   .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+}
+
+onSubmit(){
+  console.log("DATA :::::: " ,this.dailyleadform.value);
+  
+  this.service.Searchleaddetails(this.dailyleadform.value).subscribe(
+    (responce:any)=>{
+      this.leadsList=responce.data;
+      console.log('val',responce.data);
+    },
+    (error:any)=>{
+      console.error(error);        
+    }
+  )
 }
 }

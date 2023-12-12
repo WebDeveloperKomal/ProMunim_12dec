@@ -19,9 +19,8 @@ export class NewCustomersComponent {
   collectionSize =100;
   employeeForm !: FormGroup;
   employeeForm1 !: FormGroup;
-
   temCustomerList:NewCustomerModel[]=[];
-selecteddata : any ;
+  selecteddata : any ;
   constructor(private formBuilder: FormBuilder, private apiService:ApiService) {
     this.employeeForm = this.formBuilder.group({
       branch: ['', Validators.required], // Add validation if needed

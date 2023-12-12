@@ -29,6 +29,7 @@ export class BranchComponent {
     this.service.allBranches().subscribe(
       ( data: any) => {
         this.branchList=data.data;
+        this.collectionSize = this.branchList.length;
         console.log('Response successful!');
       },
       (error:any) => {
@@ -76,21 +77,57 @@ export class BranchComponent {
   }
 
 
-applyFilter(): void {
+// applyFilter(): void {
 //   const searchString = this.SearchText.toLowerCase();
 //   const filteredData = [...this.dataarray];
 //   this.dataarray = filteredData.filter((data) =>
 //   console.log("fndfngn")
-//     // data.branchname.toLowerCase().includes(searchString) ||
-//     // data.branchcode.toLowerCase().includes(searchString) ||
-//     // data.branchcity.toLowerCase().includes(searchString) ||
-//     // data.branchaddress.toLowerCase().includes(searchString)
+//      data.branchname.toLowerCase().includes(searchString) ||
+//      data.branchcode.toLowerCase().includes(searchString) ||
+//      data.branchcity.toLowerCase().includes(searchString) ||
+//      data.branchaddress.toLowerCase().includes(searchString)
 //   );
+// }
+
+
+
+applyFilter(): void {
+  if (!this.SearchText) {
+    
+    this.branchList = [...this.branchList];
+    return;
+  }
+  const searchString = this.SearchText.toLowerCase();
+  this.branchList = this.branchList.filter((data) =>
+    data.branchName.toLowerCase().includes(searchString) ||
+    data.branchCode.toLowerCase().includes(searchString) ||
+    data.branchCity.toLowerCase().includes(searchString) ||
+    // data.branchclsId.toLowerCase().includes(searchString) ||
+    // data.branchClassification.toLowerCase().includes(searchString) ||
+    // data.branchArea.toLowerCase().includes(searchString) ||
+    data.branchAddress.toLowerCase().includes(searchString) 
+    // data.latitude.toLowerCase().includes(searchString) ||
+    // data.longitude.toLowerCase().includes(searchString) 
+  );
+
+  
+  // if (!this.SearchText) {
+    
+  //   this.complianceList = [...this.complianceList];
+  //   return;
+  // }
+  // const searchString = this.SearchText.toLowerCase();
+  // this.complianceList = this.complianceList.filter((data) =>
+  //   data.complianceName.toLowerCase().includes(searchString) ||
+  //   data.taxLink.toLowerCase().includes(searchString) ||
+  //   data.complianceDueDate.toLowerCase().includes(searchString)
+  // );
+
 }
 refreshCountries() {
-//   this.countries = this.dataarray
-//     .map((country, i) => ({id: i + 1, ...country}))
-//     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  this.countries = this.dataarray
+    .map((country, i) => ({id: i + 1, ...country}))
+    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
 }
 
 

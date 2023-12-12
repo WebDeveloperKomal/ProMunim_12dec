@@ -4,7 +4,7 @@ import { ComplianceModel } from './view-compliance.component.model';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-view-compliance',
   templateUrl: './view-compliance.component.html',
@@ -16,7 +16,7 @@ export class ViewComplianceComponent {
   compliance:ComplianceModel = new ComplianceModel();
   id!:number;
 
-  constructor(private formBuilder: FormBuilder, private apiService:ApiService, private route:ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private apiService:ApiService, private route:ActivatedRoute,private datePipe: DatePipe) {
       this.complianceForm = this.formBuilder.group({
       complianceName: ['', Validators.required], // Add validation if needed 
       taxLink: ['', Validators.required], // Add validation if needed
@@ -29,7 +29,16 @@ export class ViewComplianceComponent {
     this.id = this.route.snapshot.params['id'];
     this.apiService.complianceById(this.id).subscribe(
       (response:any)=>{
-        this.compliance=response.data;},
+        this.compliance=response.data;
+        this.complianceForm.patchValue({
+          complianceName: response.data[0].complianceName,
+          taxLink: response.data[0].taxLink,
+          // complianceDueDate: response.data[0].complianceDueDate,
+          complianceDueDate : this.datePipe.transform(response.data[0].complianceDueDate, 'yyyy-MM-dd') || ''
+          // complianceDueDate: this.convertDateTimeToDate( response.data[0].complianceDueDate)
+
+        });
+      },
       (error:any)=>{console.error(error);}
     )
   }

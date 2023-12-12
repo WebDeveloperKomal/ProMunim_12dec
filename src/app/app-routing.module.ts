@@ -181,13 +181,13 @@ const routes: Routes = [
     
     
     { path: "alldailyvisits", component: AllDailyVisitComponent , canActivate:[AuthGuard] },
-    { path: "view-add-dailyvisits", component: ViewAddDailyvisitComponent , canActivate:[AuthGuard] },
+    { path: "view-add-dailyvisits/:id", component: ViewAddDailyvisitComponent , canActivate:[AuthGuard] },
     // { path: "view-all-visits", component: ViewAllVisitsComponent},
     // { path: "add-visit-details", component: AddVisitDetailsComponent},
     
     
     { path: "alldailyleads", component: AlldailyleadsComponent , canActivate:[AuthGuard] },
-    { path: "view-add-dailyLeads", component: ViewAddDailyleadsComponent , canActivate:[AuthGuard] },
+    { path: "view-add-dailyLeads/:id", component: ViewAddDailyleadsComponent , canActivate:[AuthGuard] },
     // { path: "view-all-leads", component: ViewAllLeadsComponent},
     // { path: "add-leads-details", component: AllLeadsDetailsComponent},
     
@@ -214,7 +214,7 @@ const routes: Routes = [
     
     { path: "alltechsupport", component: TechSupportComponent , canActivate:[AuthGuard] },
     { path: "add-ticket", component: AddTicketComponent  , canActivate:[AuthGuard]},
-    { path: "view-techsupport", component: ViewTechsupportComponent , canActivate:[AuthGuard] },
+    { path: "view-techsupport/:id", component: ViewTechsupportComponent , canActivate:[AuthGuard] },
     { path: "newsalert", component: NewsAlertComponent  , canActivate:[AuthGuard]},
     { path: "add-news-alert", component: AddNewsAlertComponent , canActivate:[AuthGuard] },
     { path: "view-news-alert", component: ViewNewsAlertComponent , canActivate:[AuthGuard] },

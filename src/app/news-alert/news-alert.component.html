@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row">
     <div class="col">
       <nav aria-label="breadcrumb">
@@ -6,7 +6,6 @@
           <li class="breadcrumb-item">
             <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
           </li>
-          <!-- <li class="breadcrumb-item"><a href="#">Settings</a></li> -->
           <li class="breadcrumb-item active" aria-current="page">News Alert</li>
         </ol>
       </nav>
@@ -32,7 +31,6 @@
                 <p>Show
                   <select name="branch_datatable_length" (ngModelChange)="refreshCountries()" [(ngModel)]="pageSize"
                     aria-controls="branch_datatable">
-                    <!-- [(ngModel)]="resultsPerPage" -->
                     <option [ngValue]="10">10</option>
                     <option [ngValue]="25">25</option>
                     <option [ngValue]="50">50</option>
@@ -71,8 +69,7 @@
             <tr
               *ngFor="let data of dataarray  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
               <td>{{index+1}}</td>
-              <!-- <td>{{data.branchid}}</td> -->
-              <!-- <td>{{data.branchname}}</td> -->
+          
               <td>{{data.branchcode}}</td>
               <td>{{data.branchcity}}</td>
               <td>{{data.branchaddress}}</td>
@@ -81,14 +78,11 @@
                               data-bs-toggle="modal" routerLink="/set/view-news-alert" data-bs-target="#exampleModal1">
                               <i class="ace-icon fa fa-pencil bigger-120"></i>
                             </button>&nbsp;&nbsp;
-                            <!-- <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/" >
-                                          <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                      </button> -->
+                           
 
                             <button class="btn btn-xs"
                               style=" font-size: 13px; background-color:#DC3545!important; color: white;"
                               (click)="delete()">
-                              <!-- <i class="fa fa-trash"  aria-hidden="true"></i> -->
                               <i class="fa-solid fa-trash-can"></i>
                             </button>
                           </td>
@@ -108,4 +102,115 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
+            </li>
+            <!-- <li class="breadcrumb-item"><a href="#">Settings</a></li> -->
+            <li class="breadcrumb-item active" aria-current="page">News Alert</li>
+          </ol>
+        </nav>
+  
+        <div class="container ">
+          <div class="row">
+            <div class="col">
+              <div class="page-header">
+                <h1>
+                  News Alert
+                </h1>
+              </div>
+              <div>
+                <button type="button" routerLink="/set/add-news-alert" class="btn btn-info mb-3" style="float: right;">
+                  Add News Alert</button>
+              </div>
+            </div>
+          </div>
+          <div id="branch_datatable_wrapper" class="dataTables_wrapper no-footer">
+            <div class="row">
+              <div class="col-lg-9 col-md-8">
+                <div class="dataTables_length" id="branch_datatable_length">
+                  <p>Show
+                    <select name="branch_datatable_length" (ngModelChange)="refreshCountries()" [(ngModel)]="pageSize"
+                      aria-controls="branch_datatable">
+                      <!-- [(ngModel)]="resultsPerPage" -->
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="25">25</option>
+                      <option [ngValue]="50">50</option>
+                      <option [ngValue]="100">100</option>
+                    </select> entries
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3">
+                <div class="dataTables_filter" id="branch_datatable_filter">
+                  <p>Search:
+                    <input type="text" [(ngModel)]="SearchText" (input)="applyFilter()" placeholder=""
+                      aria-controls="branch_datatable">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr role="row">
+                <th width="5%" class="sorting_asc" tabindex="0" aria-controls="newsAlert_datatable" rowspan="1"
+                  colspan="1" aria-label="Sr.No.: activate to sort column descending" style="width: 45px;"
+                  aria-sort="ascending">Sr.No.</th>
+                <th width="13%" class="sorting" tabindex="0" aria-controls="newsAlert_datatable" rowspan="1" colspan="1"
+                  aria-label="Date: activate to sort column ascending" style="width: 143px;">Date</th>
+                <th width="30%" class="sorting" tabindex="0" aria-controls="newsAlert_datatable" rowspan="1" colspan="1"
+                  aria-label="Subject: activate to sort column ascending" style="width: 379px;">Subject</th>
+                <th width="40%" class="sorting" tabindex="0" aria-controls="newsAlert_datatable" rowspan="1" colspan="1"
+                  aria-label="Description: activate to sort column ascending" style="width: 518px;">Description</th>
+                  <th width="40%" class="sorting" tabindex="0" aria-controls="newsAlert_datatable" rowspan="1" colspan="1"
+                  aria-label="Description: activate to sort column ascending" style="width: 150px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let data of NewsAlertList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
+                <td>{{index+1}}</td>
+                <!-- <td>{{data.branchid}}</td> -->
+                <!-- <td>{{data.branchname}}</td> -->
+                <td>{{data.date}}</td>
+                <td>{{data.subject}}</td>
+                <td>{{data.description}}</td>
+               <td> <button class="btn btn-xs"
+                 style="font-size: 13px; background-color:#003974!important;  color: white;"
+                                data-bs-toggle="modal" routerLink="/set/view-news-alert" data-bs-target="#exampleModal1">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                              </button>&nbsp;&nbsp;
+                              <!-- <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/" >
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </button> -->
+  
+                              <button class="btn btn-xs"
+                                style=" font-size: 13px; background-color:#DC3545!important; color: white;"
+                                (click)="delete(data.newsAlertId)">
+                                <i class="fa-solid fa-trash-can"></i>
+                              </button>
+                            </td>
+  
+                            </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-between p-2">
+            <div class="dataTables_info mt-3" style="font-size: 14px;" id="branch_datatable_info" role="status"
+              aria-live="polite">
+              Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
+                pageSize}} of {{NewsAlertList.length}} entries </div>
+                <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
+                  aria-label="Default pagination"></ngb-pagination>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

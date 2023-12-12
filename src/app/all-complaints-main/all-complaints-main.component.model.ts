@@ -1,9 +1,12 @@
 export class AllCOmplaintsMainModel {
-    branchid : any;
-    branchname: any;
-    branchcode: any;
-    branchcity: any;
-    branchaddress: any;
-    emiid : any;
-    branchcustname : any;
+    complaintId:any;
+    ticketId:any;
+    accountNo:any;
+    subject: any;
+    date: any;
+    status: any ;
+    branchId: any;
+    insertByUser: any;
+    companyName: any;
+    branch:any;
 }

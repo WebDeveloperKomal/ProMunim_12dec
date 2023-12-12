@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NewsalertModel } from './news-alert.component.model';
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-news-alert',
@@ -7,41 +10,94 @@ import { NewsalertModel } from './news-alert.component.model';
   styleUrls: ['./news-alert.component.css']
 })
 export class NewsAlertComponent {
-  SearchText : any ;
-  branchid : number | undefined;
-  branchname : any;
-  branchcode: any;
-  branchcity: any;
-  branchaddress : any;
+  SearchText: any;
+
   page = 1;
-  pageSize = 10 ;
+  pageSize = 10;
   dataarray: NewsalertModel[] = [];
   currentPage: number = 1;
   countries: NewsalertModel[] | undefined;
-  collectionSize =100;
-  constructor() {
-  this.dataarray = [
-    {branchid : 1,branchcode :'2019-11-18' , branchcity :'Revision of Fees for Rural' , branchaddress:'Dear Team, Our revised schedule of charges which will be applicable w.e.f 18.11.2019 for all the New Business and Existing Dormant and Close accounts which will be activate from today. Note: Current Live Customers are excluded from this schedule of charges. Regards, Finance Team'  },
-    {branchid : 2,branchcode :'2018-06-19' , branchcity :'CRM Updation.' , branchaddress:'Dear IBG-iens, Updation of CRM across departments are compulsory including Daily customer Interactions (Personal Visits/ Telephonic Interaction) FPA Leads by across department, Account Finalized reports by accounts team Tax Challans by Compliance team daily Transactions by finance team, customer Complaints etc. Violation of process will be led to action against the defaulter. Regards, Director - Support'  },
-   ]
-}
+  collectionSize = 100;
 
-applyFilter(): void {
-  const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  this.dataarray = filteredData.filter((data) =>
-    // data.branchname.toLowerCase().includes(searchString) ||
-    data.branchcode.toLowerCase().includes(searchString) ||
-    data.branchcity.toLowerCase().includes(searchString) ||
-    data.branchaddress.toLowerCase().includes(searchString)
-  );
-}
-refreshCountries() {
-  this.countries = this.dataarray
-    .map((country, i) => ({id: i + 1, ...country}))
-    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-}
-delete(){
-  confirm("Are you sure to delete this record")
-}
+  NewsAlertList: NewsalertModel[] = [];
+
+  constructor(private api: ApiService , private router: Router) {
+
+  }
+
+  ngOnInit() {
+    this.api.allNewsAlert().subscribe(
+      (data: any) => {
+        this.NewsAlertList = data.data;
+        console.log('Response successful!',data.data);
+        this.collectionSize = data.data.length;
+      },
+      (error: any) => {
+        console.error('API Error:', error);
+      }
+    )
+  }
+
+  // delete(newsAlertId: number) {
+  //   console.log('ID :::::', newsAlertId);
+  //   this.api.deleteNewsAlert(newsAlertId).subscribe(
+  //     (response: any) => {
+  //       console.log(response.data);
+  //       window.location.reload();
+  //     },
+  //     (error: any) => {
+  //       console.error(error);
+  //     }
+  //   )
+  // }
+
+  delete(newsAlertId: number){
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+      if (result.isConfirmed) 
+      {
+        this.api.deleteNewsAlert(newsAlertId).subscribe(
+              (response: any) => {
+                console.log(response.data);
+                window.location.reload();
+              },
+          (error:any)=>{
+            console.error(error);
+            Swal.fire({
+              title: "Error!",
+              icon: "error"
+            });
+          }
+        );
+        setInterval(()=>{window.location.reload()},1000);        
+      }
+    });
+    
+  }
+
+  applyFilter(): void {
+    const searchString = this.SearchText.toLowerCase();
+    const filteredData = [...this.NewsAlertList];
+    this.NewsAlertList = filteredData.filter((data) =>
+      // (data.date !== null && !isNaN(data.date) && data.date.toString().includes(searchString)) ||
+      data.subject.toLowerCase().includes(searchString) ||
+      data.description.toLowerCase().includes(searchString) 
+      
+    );
+  }
+  refreshCountries() {
+    this.countries = this.dataarray
+      .map((country, i) => ({id: i + 1, ...country}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+  // delete(){
+  //   confirm("Are you sure to delete this record")
+  // }
 }

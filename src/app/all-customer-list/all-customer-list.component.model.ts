@@ -1,9 +1,9 @@
 export class AllCustomerListModel {
-    branchid : any;
-    branchname: any;
-    branchcode: any;
-    branchcity: any;
-    branchaddress: any;
-    emiid : any;
-    branchcustname : any;
+    customerFullName : any;
+    branchId: any;
+    accountNo: any;
+    companyName: any;
+    customerId: any;
+    branch : any;
+    tId : any;
 }

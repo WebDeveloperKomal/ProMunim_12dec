@@ -12,13 +12,13 @@ import Swal from 'sweetalert2';
 })
 
 export class ViewDepartmentComponent {
-  adddepartmentForm !: FormGroup;
+  viewdepartmentForm !: FormGroup;
   dataarray: any[] = [];
   dept:DepartmentModel = new DepartmentModel();
   id:any;
 
   constructor(private formBuilder: FormBuilder, private apiService:ApiService, private route:ActivatedRoute) {
-    this.adddepartmentForm = this.formBuilder.group({
+    this.viewdepartmentForm = this.formBuilder.group({
       selmaindepart: ['', Validators.required], // Add validation if needed
       department: ['', Validators.required], // Add validation if needed     
     });
@@ -29,7 +29,15 @@ ngOnInit(){
     this.id = this.route.snapshot.params['id'];
     this.apiService.DepartmentById(this.id).subscribe(
       (response:any)=>{
-        this.dept=response.data;},
+        this.dept=response.data;
+        console.log('val',response.data  );
+        console.log('val',response.data.depName  );
+      this.viewdepartmentForm.patchValue({
+        departmentName: response.data[0].departmentName ,
+        mainDepName:  response.data[0].depName 
+      })
+      
+      },
       (error:any)=>{console.error(error);}
     )
   }

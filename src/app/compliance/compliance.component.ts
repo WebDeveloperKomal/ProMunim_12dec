@@ -26,7 +26,9 @@ export class ComplianceComponent {
  
   ngOnInit(){
     this.apiService.allCompliances().subscribe(
-      (res:any)=>{this.complianceList=res.data},
+      (res:any)=>{this.complianceList=res.data
+        this.collectionSize = this.complianceList.length;
+      },
       (error:any)=>{console.error(error);
       }
     )
@@ -71,19 +73,25 @@ export class ComplianceComponent {
     
   }
 
+
 applyFilter(): void {
-  // const searchString = this.SearchText.toLowerCase();
-  // const filteredData = [...this.dataarray];
-  // this.dataarray = filteredData.filter((data) =>
-  //   data.branchname.toLowerCase().includes(searchString) ||
-  //   data.branchcode.toLowerCase().includes(searchString) ||
-  //   data.branchcity.toLowerCase().includes(searchString) ||
-  //   data.branchaddress.toLowerCase().includes(searchString)
-  // );
+  if (!this.SearchText) {
+    
+    this.complianceList = [...this.complianceList];
+    return;
+  }
+  const searchString = this.SearchText.toLowerCase();
+  this.complianceList = this.complianceList.filter((data) =>
+    data.complianceName.toLowerCase().includes(searchString) ||
+    data.taxLink.toLowerCase().includes(searchString) ||
+    data.complianceDueDate.toLowerCase().includes(searchString)
+  );
 }
+
+
 refreshCountries() {
-  // this.countries = this.dataarray
-  //   .map((country, i) => ({id: i + 1, ...country}))
-  //   .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  this.countries = this.complianceList
+    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
 }
+
 }
